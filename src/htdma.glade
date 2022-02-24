@@ -1,0 +1,4058 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.22.2 -->
+<interface>
+  <requires lib="gtk+" version="3.20"/>
+  <object class="GtkAdjustment" id="FluxCycles">
+    <property name="lower">1</property>
+    <property name="upper">10</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment1">
+    <property name="lower">5</property>
+    <property name="upper">30</property>
+    <property name="value">22</property>
+    <property name="step_increment">0.10000000000000001</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment2">
+    <property name="lower">5</property>
+    <property name="upper">40</property>
+    <property name="value">23</property>
+    <property name="step_increment">0.10000000000000001</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment3">
+    <property name="lower">-20</property>
+    <property name="upper">10</property>
+    <property name="value">3</property>
+    <property name="step_increment">0.10000000000000001</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment4">
+    <property name="lower">-10</property>
+    <property name="upper">10</property>
+    <property name="value">0.5</property>
+    <property name="step_increment">0.10000000000000001</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="hkFluxState">
+    <property name="upper">1</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">1</property>
+  </object>
+  <object class="GtkAdjustment" id="hkMax">
+    <property name="upper">5</property>
+    <property name="value">5</property>
+    <property name="step_increment">0.10000000000000001</property>
+    <property name="page_increment">0.10000000000000001</property>
+  </object>
+  <object class="GtkAdjustment" id="hkMin">
+    <property name="lower">1</property>
+    <property name="upper">5</property>
+    <property name="value">5</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="hkScans1">
+    <property name="lower">1</property>
+    <property name="upper">5</property>
+    <property name="value">1</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="hkScans2">
+    <property name="upper">10</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkTextBuffer" id="textbuffer1">
+    <property name="text" translatable="yes">Empty</property>
+  </object>
+  <object class="GtkWindow" id="mainWindow">
+    <property name="width_request">1900</property>
+    <property name="height_request">1000</property>
+    <property name="can_focus">False</property>
+    <property name="window_position">center</property>
+    <property name="default_width">-1</property>
+    <property name="default_height">-1</property>
+    <property name="gravity">center</property>
+    <child type="titlebar">
+      <object class="GtkHeaderBar" id="header">
+        <property name="width_request">1900</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="title" translatable="yes">NC State DAQ</property>
+        <property name="subtitle" translatable="yes">HTDMA </property>
+        <property name="has_subtitle">False</property>
+        <property name="spacing">7</property>
+        <property name="show_close_button">True</property>
+        <child>
+          <object class="GtkEntry" id="DataFile">
+            <property name="width_request">400</property>
+            <property name="height_request">10</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="max_width_chars">37</property>
+            <property name="text" translatable="yes">/home/mdpetter/Documents/Data/</property>
+            <property name="primary_icon_stock">gtk-file</property>
+            <property name="secondary_icon_stock">gtk-media-record</property>
+          </object>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <object class="GtkComboBoxText" id="ManualStateSelection">
+            <property name="width_request">-1</property>
+            <property name="height_request">-1</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="active">0</property>
+            <property name="active_id">SMPS</property>
+            <items>
+              <item id="SMPS" translatable="yes">SMPS</item>
+              <item id="HTDMA" translatable="yes">HTDMA</item>
+            </items>
+          </object>
+          <packing>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkPaned">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <child>
+          <object class="GtkStackSidebar">
+            <property name="width_request">300</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="stack">stack1</property>
+          </object>
+          <packing>
+            <property name="resize">False</property>
+            <property name="shrink">False</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkStack" id="stack1">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <child>
+              <object class="GtkFixed" id="ParticleCounters">
+                <property name="width_request">32</property>
+                <property name="height_request">32</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Particle Counter                                                   CPC  #1                                                      CPC  #2                                                  CPC  #3                                                                                                                                        </property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell Bold 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">10</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkComboBoxText" id="CPCType1">
+                    <property name="width_request">180</property>
+                    <property name="height_request">30</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="active">6</property>
+                    <property name="active_id">TSI7610</property>
+                    <items>
+                      <item id="TSI3771" translatable="yes">TSI 3771</item>
+                      <item id="TSI3772" translatable="yes">TSI 3772</item>
+                      <item id="TSI3020" translatable="yes">TSI 3020</item>
+                      <item id="TSI3762" translatable="yes">TSI 3762</item>
+                      <item id="TSI3776C" translatable="yes">TSI 3776C</item>
+                      <item id="TSI7610" translatable="yes">TSI7610</item>
+                      <item id="TSI3022" translatable="yes">TSI3022</item>
+                    </items>
+                  </object>
+                  <packing>
+                    <property name="x">250</property>
+                    <property name="y">38</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Sample Flow Rate (L min-1)</property>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">85</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="CPCSampleFlow1">
+                    <property name="width_request">180</property>
+                    <property name="height_request">34</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">0.3</property>
+                  </object>
+                  <packing>
+                    <property name="x">250</property>
+                    <property name="y">78</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Serial Port</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">125</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SerialPort1">
+                    <property name="width_request">180</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="text" translatable="yes">/dev/ttyUSB0</property>
+                  </object>
+                  <packing>
+                    <property name="x">250</property>
+                    <property name="y">118</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Bits per second</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">165</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkComboBoxText" id="BaudRate1">
+                    <property name="name">            </property>
+                    <property name="width_request">180</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="halign">start</property>
+                    <property name="valign">start</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="active">3</property>
+                    <property name="active_id">115200</property>
+                    <items>
+                      <item id="1200" translatable="yes">1200</item>
+                      <item id="2400" translatable="yes">2400</item>
+                      <item id="4800" translatable="yes">4800</item>
+                      <item id="9600" translatable="yes">9600</item>
+                      <item id="19200" translatable="yes">19200</item>
+                      <item id="38400" translatable="yes">38400</item>
+                      <item id="57600" translatable="yes">57600</item>
+                      <item id="115200" translatable="yes">115200</item>
+                    </items>
+                  </object>
+                  <packing>
+                    <property name="x">250</property>
+                    <property name="y">158</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Data bits</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">205</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkComboBoxText" id="DataBits1">
+                    <property name="name">            </property>
+                    <property name="width_request">180</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="halign">start</property>
+                    <property name="valign">start</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="active">2</property>
+                    <property name="active_id">8</property>
+                    <items>
+                      <item id="5" translatable="yes">5</item>
+                      <item id="6" translatable="yes">6</item>
+                      <item id="7" translatable="yes">7</item>
+                      <item id="8" translatable="yes">8</item>
+                    </items>
+                  </object>
+                  <packing>
+                    <property name="x">250</property>
+                    <property name="y">198</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkComboBoxText" id="CPCType2">
+                    <property name="width_request">180</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="active">0</property>
+                    <property name="active_id">0</property>
+                    <items>
+                      <item id="TSI3771" translatable="yes">TSI 3771</item>
+                      <item id="TSI3022" translatable="yes">TSI 3022</item>
+                      <item id="TSI3020" translatable="yes">TSI 3020</item>
+                      <item id="TSI3762" translatable="yes">TSI 3762</item>
+                    </items>
+                  </object>
+                  <packing>
+                    <property name="x">460</property>
+                    <property name="y">38</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="CPCSampleFlow2">
+                    <property name="width_request">180</property>
+                    <property name="height_request">0</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">1.0</property>
+                  </object>
+                  <packing>
+                    <property name="x">460</property>
+                    <property name="y">78</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Concentration Counts (cm-3)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">425</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="Ncounts1">
+                    <property name="width_request">180</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="editable">False</property>
+                  </object>
+                  <packing>
+                    <property name="x">250</property>
+                    <property name="y">418</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Concentration Serial (cm-3)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">465</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="Nserial1">
+                    <property name="width_request">180</property>
+                    <property name="height_request">34</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="editable">False</property>
+                  </object>
+                  <packing>
+                    <property name="x">250</property>
+                    <property name="y">458</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SerialPort2">
+                    <property name="width_request">180</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="text" translatable="yes">/dev/ttyUSB1</property>
+                  </object>
+                  <packing>
+                    <property name="x">460</property>
+                    <property name="y">118</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkComboBoxText" id="BaudRate2">
+                    <property name="name">            </property>
+                    <property name="width_request">180</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="halign">start</property>
+                    <property name="valign">start</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="active">7</property>
+                    <property name="active_id">115200</property>
+                    <items>
+                      <item id="1200" translatable="yes">1200</item>
+                      <item id="2400" translatable="yes">2400</item>
+                      <item id="4800" translatable="yes">4800</item>
+                      <item id="9600" translatable="yes">9600</item>
+                      <item id="19200" translatable="yes">19200</item>
+                      <item id="38400" translatable="yes">38400</item>
+                      <item id="57600" translatable="yes">57600</item>
+                      <item id="115200" translatable="yes">115200</item>
+                    </items>
+                  </object>
+                  <packing>
+                    <property name="x">460</property>
+                    <property name="y">158</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkComboBoxText" id="DataBits2">
+                    <property name="name">            </property>
+                    <property name="width_request">180</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="halign">start</property>
+                    <property name="valign">start</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="active">3</property>
+                    <property name="active_id">7</property>
+                    <items>
+                      <item id="5" translatable="yes">5</item>
+                      <item id="6" translatable="yes">6</item>
+                      <item id="7" translatable="yes">7</item>
+                      <item id="8" translatable="yes">8</item>
+                    </items>
+                  </object>
+                  <packing>
+                    <property name="x">460</property>
+                    <property name="y">198</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkComboBoxText" id="Parity2">
+                    <property name="name">            </property>
+                    <property name="width_request">180</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="halign">start</property>
+                    <property name="valign">start</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="active">0</property>
+                    <property name="active_id">SP_PARITY_NONE</property>
+                    <items>
+                      <item id="SP_PARITY_NONE" translatable="yes">None</item>
+                      <item id="SP_PARITY_EVEN" translatable="yes">Even</item>
+                      <item id="SP_PARITY_ODD" translatable="yes">Odd</item>
+                      <item id="SP_PARITY_MARK" translatable="yes">Mark</item>
+                      <item id="SP_PARITY_SPACE" translatable="yes">Space</item>
+                    </items>
+                  </object>
+                  <packing>
+                    <property name="x">460</property>
+                    <property name="y">238</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkComboBoxText" id="StopBits2">
+                    <property name="name">            </property>
+                    <property name="width_request">180</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="halign">start</property>
+                    <property name="valign">start</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="active">0</property>
+                    <property name="active_id">0</property>
+                    <items>
+                      <item id="1" translatable="yes">1</item>
+                      <item id="1.5" translatable="yes">1.5</item>
+                      <item id="2" translatable="yes">2</item>
+                    </items>
+                  </object>
+                  <packing>
+                    <property name="x">460</property>
+                    <property name="y">278</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="Ncounts2">
+                    <property name="width_request">180</property>
+                    <property name="height_request">0</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="editable">False</property>
+                  </object>
+                  <packing>
+                    <property name="x">460</property>
+                    <property name="y">418</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="Nserial2">
+                    <property name="width_request">180</property>
+                    <property name="height_request">0</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="editable">False</property>
+                  </object>
+                  <packing>
+                    <property name="x">460</property>
+                    <property name="y">458</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkComboBoxText" id="CPCType3">
+                    <property name="width_request">180</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="active">1</property>
+                    <property name="active_id">0</property>
+                    <items>
+                      <item id="TSI3771" translatable="yes">TSI 3771</item>
+                      <item id="TSI3772" translatable="yes">TSI 3772</item>
+                      <item id="TSI3020" translatable="yes">TSI 3020</item>
+                      <item id="TSI3762" translatable="yes">TSI 3762</item>
+                    </items>
+                  </object>
+                  <packing>
+                    <property name="x">670</property>
+                    <property name="y">38</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="CPCSampleFlow3">
+                    <property name="width_request">180</property>
+                    <property name="height_request">30</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">1.0</property>
+                  </object>
+                  <packing>
+                    <property name="x">670</property>
+                    <property name="y">78</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SerialPort3">
+                    <property name="width_request">180</property>
+                    <property name="height_request">30</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="text" translatable="yes">/dev/ttyUSB7</property>
+                  </object>
+                  <packing>
+                    <property name="x">670</property>
+                    <property name="y">118</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkComboBoxText" id="BaudRate3">
+                    <property name="name">            </property>
+                    <property name="width_request">180</property>
+                    <property name="height_request">30</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="halign">start</property>
+                    <property name="valign">start</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="active">7</property>
+                    <property name="active_id">115200</property>
+                    <items>
+                      <item id="1200" translatable="yes">1200</item>
+                      <item id="2400" translatable="yes">2400</item>
+                      <item id="4800" translatable="yes">4800</item>
+                      <item id="9600" translatable="yes">9600</item>
+                      <item id="19200" translatable="yes">19200</item>
+                      <item id="38400" translatable="yes">38400</item>
+                      <item id="57600" translatable="yes">57600</item>
+                      <item id="115200" translatable="yes">115200</item>
+                    </items>
+                  </object>
+                  <packing>
+                    <property name="x">670</property>
+                    <property name="y">158</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkComboBoxText" id="DataBits3">
+                    <property name="name">            </property>
+                    <property name="width_request">180</property>
+                    <property name="height_request">30</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="halign">start</property>
+                    <property name="valign">start</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="active">3</property>
+                    <property name="active_id">7</property>
+                    <items>
+                      <item id="5" translatable="yes">5</item>
+                      <item id="6" translatable="yes">6</item>
+                      <item id="7" translatable="yes">7</item>
+                      <item id="8" translatable="yes">8</item>
+                    </items>
+                  </object>
+                  <packing>
+                    <property name="x">670</property>
+                    <property name="y">198</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkComboBoxText" id="Parity3">
+                    <property name="name">            </property>
+                    <property name="width_request">180</property>
+                    <property name="height_request">30</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="halign">start</property>
+                    <property name="valign">start</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="active">0</property>
+                    <property name="active_id">SP_PARITY_NONE</property>
+                    <items>
+                      <item id="SP_PARITY_NONE" translatable="yes">None</item>
+                      <item id="SP_PARITY_EVEN" translatable="yes">Even</item>
+                      <item id="SP_PARITY_ODD" translatable="yes">Odd</item>
+                      <item id="SP_PARITY_MARK" translatable="yes">Mark</item>
+                      <item id="SP_PARITY_SPACE" translatable="yes">Space</item>
+                    </items>
+                  </object>
+                  <packing>
+                    <property name="x">670</property>
+                    <property name="y">238</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkComboBoxText" id="StopBits3">
+                    <property name="name">            </property>
+                    <property name="width_request">180</property>
+                    <property name="height_request">30</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="halign">start</property>
+                    <property name="valign">start</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="active">0</property>
+                    <property name="active_id">0</property>
+                    <items>
+                      <item id="1" translatable="yes">1</item>
+                      <item id="1.5" translatable="yes">1.5</item>
+                      <item id="2" translatable="yes">2</item>
+                    </items>
+                  </object>
+                  <packing>
+                    <property name="x">670</property>
+                    <property name="y">278</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="Nserial3">
+                    <property name="width_request">180</property>
+                    <property name="height_request">30</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="editable">False</property>
+                  </object>
+                  <packing>
+                    <property name="x">670</property>
+                    <property name="y">458</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Detector Type</property>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">45</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Parity</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">245</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Stop bits</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">285</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkComboBoxText" id="Parity1">
+                    <property name="name">            </property>
+                    <property name="width_request">180</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="halign">start</property>
+                    <property name="valign">start</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="active">1</property>
+                    <property name="active_id">SP_PARITY_NONE</property>
+                    <items>
+                      <item id="SP_PARITY_NONE" translatable="yes">None</item>
+                      <item id="SP_PARITY_EVEN" translatable="yes">Even</item>
+                      <item id="SP_PARITY_ODD" translatable="yes">Odd</item>
+                      <item id="SP_PARITY_MARK" translatable="yes">Mark</item>
+                      <item id="SP_PARITY_SPACE" translatable="yes">Space</item>
+                    </items>
+                  </object>
+                  <packing>
+                    <property name="x">250</property>
+                    <property name="y">238</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkComboBoxText" id="StopBits1">
+                    <property name="name">            </property>
+                    <property name="width_request">180</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="halign">start</property>
+                    <property name="valign">start</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="active">0</property>
+                    <property name="active_id">0</property>
+                    <items>
+                      <item id="1" translatable="yes">1</item>
+                      <item id="1.5" translatable="yes">1.5</item>
+                      <item id="2" translatable="yes">2</item>
+                    </items>
+                  </object>
+                  <packing>
+                    <property name="x">250</property>
+                    <property name="y">278</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="name">Particle Counters</property>
+                <property name="title" translatable="yes">Particle Counters</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkFixed" id="Humidity &amp; Thermoelectric">
+                <property name="width_request">32</property>
+                <property name="height_request">32</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="width_request">100</property>
+                    <property name="height_request">80</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Ultravolt HV Sense (V)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">-323</property>
+                    <property name="y">267</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Dry Sheath Flow RH Sensor</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell Bold 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">15</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">T (℃)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">85</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Td (℃)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">125</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="Tsh1">
+                    <property name="height_request">30</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="editable">False</property>
+                  </object>
+                  <packing>
+                    <property name="x">115</property>
+                    <property name="y">78</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="Tdsh1">
+                    <property name="height_request">30</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="editable">False</property>
+                  </object>
+                  <packing>
+                    <property name="x">115</property>
+                    <property name="y">118</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Dry Sample Flow RH Sensor</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell Bold 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">206</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">RH (%)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">236</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">T (℃)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">275</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Td (℃)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">316</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="Tsa1">
+                    <property name="height_request">30</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="editable">False</property>
+                  </object>
+                  <packing>
+                    <property name="x">115</property>
+                    <property name="y">270</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="Tdsa1">
+                    <property name="height_request">30</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="editable">False</property>
+                  </object>
+                  <packing>
+                    <property name="x">115</property>
+                    <property name="y">310</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Wet Sheath Flow RH Sensor</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell Bold 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">320</property>
+                    <property name="y">15</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">RH (%)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">320</property>
+                    <property name="y">45</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">T (℃)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">320</property>
+                    <property name="y">85</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Td (℃)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">320</property>
+                    <property name="y">125</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Wet Sample Flow RH Sensor</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell Bold 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">320</property>
+                    <property name="y">206</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">RH (%)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">320</property>
+                    <property name="y">236</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">T (℃)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">320</property>
+                    <property name="y">275</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Td (℃)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">320</property>
+                    <property name="y">316</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="Tsh2">
+                    <property name="height_request">30</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="editable">False</property>
+                  </object>
+                  <packing>
+                    <property name="x">405</property>
+                    <property name="y">78</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="Tdsh2">
+                    <property name="height_request">30</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="editable">False</property>
+                  </object>
+                  <packing>
+                    <property name="x">405</property>
+                    <property name="y">118</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="Tsa2">
+                    <property name="height_request">30</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="editable">False</property>
+                  </object>
+                  <packing>
+                    <property name="x">405</property>
+                    <property name="y">270</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="Tdsa2">
+                    <property name="height_request">30</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="editable">False</property>
+                  </object>
+                  <packing>
+                    <property name="x">405</property>
+                    <property name="y">310</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">RH (%)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">45</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="RHsh1">
+                    <property name="height_request">30</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="editable">False</property>
+                  </object>
+                  <packing>
+                    <property name="x">115</property>
+                    <property name="y">38</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="RHsa1">
+                    <property name="height_request">30</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="editable">False</property>
+                  </object>
+                  <packing>
+                    <property name="x">115</property>
+                    <property name="y">230</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="RHsh2">
+                    <property name="height_request">30</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="editable">False</property>
+                  </object>
+                  <packing>
+                    <property name="x">405</property>
+                    <property name="y">38</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="RHsa2">
+                    <property name="height_request">30</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="editable">False</property>
+                  </object>
+                  <packing>
+                    <property name="x">405</property>
+                    <property name="y">230</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkBox" id="RHPlotDMA1">
+                    <property name="width_request">546</property>
+                    <property name="height_request">225</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <placeholder/>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">414</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Thermoelectric Controller                                       #1                                  	                        #2	         						Bath								</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell Bold 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">606</property>
+                    <property name="y">15</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Serial Port</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">606</property>
+                    <property name="y">45</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Input/Output</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell Bold 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">606</property>
+                    <property name="y">94</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Set Temperature (°C)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">606</property>
+                    <property name="y">125</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Read Temperature 1 (°C)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">606</property>
+                    <property name="y">165</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Read Temperature 2 (°C)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">606</property>
+                    <property name="y">205</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="TESerialPort1">
+                    <property name="width_request">100</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="text" translatable="yes">/dev/ttyUSB3</property>
+                  </object>
+                  <packing>
+                    <property name="x">838</property>
+                    <property name="y">38</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="TESerialPort2">
+                    <property name="width_request">100</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="text" translatable="yes">/dev/ttyUSB4</property>
+                  </object>
+                  <packing>
+                    <property name="x">1038</property>
+                    <property name="y">38</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="BathSerialPort1">
+                    <property name="width_request">100</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="text" translatable="yes">/dev/ttyUSB2</property>
+                  </object>
+                  <packing>
+                    <property name="x">1238</property>
+                    <property name="y">38</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="TE1Set">
+                    <property name="width_request">100</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="editable">False</property>
+                  </object>
+                  <packing>
+                    <property name="x">838</property>
+                    <property name="y">118</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="TE2Set">
+                    <property name="width_request">100</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="editable">False</property>
+                  </object>
+                  <packing>
+                    <property name="x">1038</property>
+                    <property name="y">118</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="BathSetT">
+                    <property name="width_request">100</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="editable">False</property>
+                  </object>
+                  <packing>
+                    <property name="x">1238</property>
+                    <property name="y">118</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="TE1ReadT1">
+                    <property name="width_request">100</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="editable">False</property>
+                  </object>
+                  <packing>
+                    <property name="x">838</property>
+                    <property name="y">158</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="TE2ReadT1">
+                    <property name="width_request">100</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="editable">False</property>
+                  </object>
+                  <packing>
+                    <property name="x">1038</property>
+                    <property name="y">158</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="BathReadT1">
+                    <property name="width_request">100</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="editable">False</property>
+                  </object>
+                  <packing>
+                    <property name="x">1238</property>
+                    <property name="y">158</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="TE1ReadT2">
+                    <property name="width_request">100</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="editable">False</property>
+                  </object>
+                  <packing>
+                    <property name="x">838</property>
+                    <property name="y">198</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="TE2ReadT2">
+                    <property name="width_request">100</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="editable">False</property>
+                  </object>
+                  <packing>
+                    <property name="x">1038</property>
+                    <property name="y">198</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="BathReadT2">
+                    <property name="width_request">100</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="editable">False</property>
+                  </object>
+                  <packing>
+                    <property name="x">1238</property>
+                    <property name="y">198</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Bath Control</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell Bold 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">606</property>
+                    <property name="y">278</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Bath Offset</property>
+                  </object>
+                  <packing>
+                    <property name="x">606</property>
+                    <property name="y">316</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Bath Manual Temperature (°C)</property>
+                  </object>
+                  <packing>
+                    <property name="x">606</property>
+                    <property name="y">357</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Calculated Values</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell Bold 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">606</property>
+                    <property name="y">414</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkSwitch" id="RHControlSwitch">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">838</property>
+                    <property name="y">446</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="ColumnAvgTemp">
+                    <property name="width_request">100</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">838</property>
+                    <property name="y">486</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="ColumnDewPoint">
+                    <property name="width_request">100</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">838</property>
+                    <property name="y">526</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="CalculatedRH">
+                    <property name="width_request">100</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">838</property>
+                    <property name="y">566</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">RH Control</property>
+                  </object>
+                  <packing>
+                    <property name="x">606</property>
+                    <property name="y">449</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Column Average Temp (°C)</property>
+                  </object>
+                  <packing>
+                    <property name="x">606</property>
+                    <property name="y">491</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Column Dewpoint (°C)</property>
+                  </object>
+                  <packing>
+                    <property name="x">606</property>
+                    <property name="y">530</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Calculated RH (%)</property>
+                  </object>
+                  <packing>
+                    <property name="x">606</property>
+                    <property name="y">573</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkBox" id="RHPlotDMA2">
+                    <property name="width_request">546</property>
+                    <property name="height_request">225</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <placeholder/>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">639</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkBox" id="RHPlotColumn">
+                    <property name="width_request">546</property>
+                    <property name="height_request">225</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <placeholder/>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="x">1029</property>
+                    <property name="y">414</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkSpinButton" id="BathManualTemp1">
+                    <property name="width_request">170</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="adjustment">adjustment2</property>
+                    <property name="digits">1</property>
+                    <property name="value">23</property>
+                  </object>
+                  <packing>
+                    <property name="x">1038</property>
+                    <property name="y">350</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkSpinButton" id="BathManualTemp">
+                    <property name="width_request">170</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="adjustment">adjustment1</property>
+                    <property name="digits">1</property>
+                    <property name="value">22</property>
+                  </object>
+                  <packing>
+                    <property name="x">838</property>
+                    <property name="y">350</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkSpinButton" id="BathOffset">
+                    <property name="width_request">170</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="adjustment">adjustment3</property>
+                    <property name="digits">1</property>
+                    <property name="value">-2.7000000000000002</property>
+                  </object>
+                  <packing>
+                    <property name="x">838</property>
+                    <property name="y">311</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkSpinButton" id="BathOffset1">
+                    <property name="width_request">170</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">-2.7</property>
+                    <property name="adjustment">adjustment4</property>
+                    <property name="digits">1</property>
+                    <property name="value">0.5</property>
+                  </object>
+                  <packing>
+                    <property name="x">1038</property>
+                    <property name="y">311</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="InletTd">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="editable">False</property>
+                  </object>
+                  <packing>
+                    <property name="x">115</property>
+                    <property name="y">370</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Inlet Td </property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">376</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkSwitch" id="CalibrationSwitch">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">838</property>
+                    <property name="y">650</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Calibration Swtich</property>
+                  </object>
+                  <packing>
+                    <property name="x">606</property>
+                    <property name="y">655</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="name">Humidity &amp; Thermoelectric</property>
+                <property name="title" translatable="yes">Humidity &amp; Thermoelectric</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkFixed" id="SMPS 1 Control">
+                <property name="width_request">32</property>
+                <property name="height_request">32</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Size Distribution Inversion Parameters</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell Bold 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">870</property>
+                    <property name="y">10</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Number of Bins</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">870</property>
+                    <property name="y">45</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Beam Transit Time (μs)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">870</property>
+                    <property name="y">85</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">λ Fallback </property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">870</property>
+                    <property name="y">125</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Effective Length (m)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">870</property>
+                    <property name="y">165</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS1NumberOfBins">
+                    <property name="width_request">168</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">120</property>
+                  </object>
+                  <packing>
+                    <property name="x">1070</property>
+                    <property name="y">38</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS1BeamTransitTime">
+                    <property name="width_request">168</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">4</property>
+                  </object>
+                  <packing>
+                    <property name="x">1070</property>
+                    <property name="y">78</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS1EffectiveLength">
+                    <property name="width_request">168</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">13</property>
+                  </object>
+                  <packing>
+                    <property name="x">1070</property>
+                    <property name="y">158</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS1LambdaLow">
+                    <property name="width_request">168</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">0.05</property>
+                  </object>
+                  <packing>
+                    <property name="x">1070</property>
+                    <property name="y">198</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS1LambdaHigh">
+                    <property name="width_request">168</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">2</property>
+                  </object>
+                  <packing>
+                    <property name="x">1070</property>
+                    <property name="y">238</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkSwitch" id="SMPS1UseCounts">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="active">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">1070</property>
+                    <property name="y">280</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">λ Low Bound</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">870</property>
+                    <property name="y">205</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">λ High Bound</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">870</property>
+                    <property name="y">245</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Use Counts</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">870</property>
+                    <property name="y">285</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">DMA Flow Configuration</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell Bold 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">470</property>
+                    <property name="y">335</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Sheath Flow (L/min)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">470</property>
+                    <property name="y">373</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Sample Flow (L/min)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">470</property>
+                    <property name="y">411</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Plumb Time (s)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">470</property>
+                    <property name="y">452</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS1SheathFlow">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">5</property>
+                  </object>
+                  <packing>
+                    <property name="x">660</property>
+                    <property name="y">367</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS1SampleFlow">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">2.5</property>
+                  </object>
+                  <packing>
+                    <property name="x">660</property>
+                    <property name="y">407</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS1PlumbTime">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">2.2</property>
+                  </object>
+                  <packing>
+                    <property name="x">660</property>
+                    <property name="y">447</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">SMPS Parameters</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell Bold 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">10</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Hold Time (s)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">45</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS1HoldTime">
+                    <property name="width_request">168</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">60</property>
+                  </object>
+                  <packing>
+                    <property name="x">250</property>
+                    <property name="y">38</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS1ScanTime">
+                    <property name="width_request">168</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">120</property>
+                  </object>
+                  <packing>
+                    <property name="x">250</property>
+                    <property name="y">79</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS1FlushTime">
+                    <property name="width_request">168</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">10</property>
+                  </object>
+                  <packing>
+                    <property name="x">250</property>
+                    <property name="y">119</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS1StartDiameter">
+                    <property name="width_request">168</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">550</property>
+                  </object>
+                  <packing>
+                    <property name="x">250</property>
+                    <property name="y">159</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS1EndDiameter">
+                    <property name="width_request">168</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">10</property>
+                  </object>
+                  <packing>
+                    <property name="x">250</property>
+                    <property name="y">199</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS1StartVoltage">
+                    <property name="width_request">168</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">22.0</property>
+                  </object>
+                  <packing>
+                    <property name="x">250</property>
+                    <property name="y">239</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS1EndVoltage">
+                    <property name="width_request">168</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">22.0</property>
+                  </object>
+                  <packing>
+                    <property name="x">250</property>
+                    <property name="y">279</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Scan Time (s)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">83</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Flush Time (s)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">123</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Start Diameter (nm)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">163</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">End Diameter (nm)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">203</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Start Voltage (V)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">243</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">End Voltage (V)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">283</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Instrument State</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell Bold 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">335</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Scan Number</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">373</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS1ScanNum">
+                    <property name="width_request">168</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">250</property>
+                    <property name="y">367</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS1ScanCount">
+                    <property name="width_request">168</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">250</property>
+                    <property name="y">407</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS1ScanState">
+                    <property name="width_request">168</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">250</property>
+                    <property name="y">447</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS1SetpointV">
+                    <property name="width_request">168</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">250</property>
+                    <property name="y">487</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS1CurrentDiam">
+                    <property name="width_request">168</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">250</property>
+                    <property name="y">527</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Scan Counter</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">411</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Scan State</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">452</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Setpoint Voltage (V)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">492</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Current Diameter (nm)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">531</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Powersupply Calibration</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell Bold 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">470</property>
+                    <property name="y">10</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Use Calibration</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">470</property>
+                    <property name="y">45</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS1PowerCalibration">
+                    <property name="width_request">358</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">1.0*signalV.value[1]+0.01</property>
+                  </object>
+                  <packing>
+                    <property name="x">470</property>
+                    <property name="y">79</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Thermodynamic State</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell Bold 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">470</property>
+                    <property name="y">163</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Temperature (°C)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">470</property>
+                    <property name="y">203</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Pressure (mb)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">470</property>
+                    <property name="y">243</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="ThermoTemp">
+                    <property name="width_request">168</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">22.0</property>
+                  </object>
+                  <packing>
+                    <property name="x">660</property>
+                    <property name="y">199</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="ThermoPressure">
+                    <property name="width_request">168</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">1001.0</property>
+                  </object>
+                  <packing>
+                    <property name="x">660</property>
+                    <property name="y">239</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkSwitch" id="SMPS1CalibrationSwitch">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="active">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">660</property>
+                    <property name="y">38</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS1LambdaFallback">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">0.25</property>
+                  </object>
+                  <packing>
+                    <property name="x">1070</property>
+                    <property name="y">118</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Serial Delay</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">870</property>
+                    <property name="y">325</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS1SerialDelay">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">2.4</property>
+                  </object>
+                  <packing>
+                    <property name="x">1070</property>
+                    <property name="y">318</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="name">SMPS 1 Control</property>
+                <property name="title" translatable="yes">SMPS 1 Control</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkFixed" id="SMPS 2 Control">
+                <property name="width_request">32</property>
+                <property name="height_request">32</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">SMPS 2 Parameters
+</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell Bold 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">10</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Hold Time (s)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">45</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS2HoldTime">
+                    <property name="width_request">168</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">30</property>
+                  </object>
+                  <packing>
+                    <property name="x">246</property>
+                    <property name="y">38</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS2ScanTime">
+                    <property name="width_request">168</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">120</property>
+                  </object>
+                  <packing>
+                    <property name="x">246</property>
+                    <property name="y">78</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Scan Time (s)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">83</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS2FlushTime">
+                    <property name="width_request">100</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">10</property>
+                  </object>
+                  <packing>
+                    <property name="x">246</property>
+                    <property name="y">118</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Flush Time (s)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">123</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS2StartDiameter">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">250</property>
+                  </object>
+                  <packing>
+                    <property name="x">246</property>
+                    <property name="y">158</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Start Diameter (nm)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">163</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Instrument State</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell Bold 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">335</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS2EndDiameter">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">25</property>
+                  </object>
+                  <packing>
+                    <property name="x">246</property>
+                    <property name="y">198</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS2StartVoltage">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">22.0</property>
+                  </object>
+                  <packing>
+                    <property name="x">246</property>
+                    <property name="y">238</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS2EndVoltage">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">22.0</property>
+                  </object>
+                  <packing>
+                    <property name="x">246</property>
+                    <property name="y">278</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">End Diameter (nm)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">203</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Start Voltage (V)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">243</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">End Voltage (V)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">283</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">HTDMA Diameter Number</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">373</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Scan Counter</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">411</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Scan State</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">452</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Setpoint Voltage (V)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">492</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Current Diameter (nm)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">531</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS2ScanNum">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">246</property>
+                    <property name="y">366</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS2ScanCount">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">246</property>
+                    <property name="y">406</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS2ScanState">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">246</property>
+                    <property name="y">446</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS2SetpointV">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">246</property>
+                    <property name="y">486</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS2CurrentDiam">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">246</property>
+                    <property name="y">526</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Powersupply Calibration
+</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell Bold 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">462</property>
+                    <property name="y">10</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Use Calibration</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">462</property>
+                    <property name="y">45</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Sheath Flow (L/min)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">462</property>
+                    <property name="y">164</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Sample Flow (L/min)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">462</property>
+                    <property name="y">205</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Plumb Time (s)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">462</property>
+                    <property name="y">245</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">DMA Flow Configuration
+</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell Bold 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">462</property>
+                    <property name="y">125</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS2PowerCalibration">
+                    <property name="width_request">383</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">1.0*signalV.value[2]+0.01</property>
+                  </object>
+                  <packing>
+                    <property name="x">462</property>
+                    <property name="y">79</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS2SheathFlow">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">5</property>
+                  </object>
+                  <packing>
+                    <property name="x">678</property>
+                    <property name="y">158</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS2SampleFlow">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">1.0</property>
+                  </object>
+                  <packing>
+                    <property name="x">678</property>
+                    <property name="y">198</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS2PlumbTime">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">4.5</property>
+                  </object>
+                  <packing>
+                    <property name="x">678</property>
+                    <property name="y">238</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkSwitch" id="SMPS2CalibrationSwitch">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="active">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">678</property>
+                    <property name="y">38</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Size Distribution Inversion Parameters
+</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell Bold 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">894</property>
+                    <property name="y">10</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Number of Bins</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">894</property>
+                    <property name="y">45</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">870</property>
+                    <property name="y">83</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Beam Transit Time (μs)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">894</property>
+                    <property name="y">85</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">λ Fallback</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">894</property>
+                    <property name="y">125</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Effective Length (m)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">894</property>
+                    <property name="y">165</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">λ Low Bound</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">894</property>
+                    <property name="y">205</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">λ High Bound</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">894</property>
+                    <property name="y">245</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Use Counts</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">894</property>
+                    <property name="y">285</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS2NumberOfBins">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">120</property>
+                  </object>
+                  <packing>
+                    <property name="x">1110</property>
+                    <property name="y">38</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS2LambdaFallback">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">0.25</property>
+                  </object>
+                  <packing>
+                    <property name="x">1110</property>
+                    <property name="y">118</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS2LambdaLow">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">0.008</property>
+                  </object>
+                  <packing>
+                    <property name="x">1110</property>
+                    <property name="y">198</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS2LambdaHigh">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">0.2</property>
+                  </object>
+                  <packing>
+                    <property name="x">1110</property>
+                    <property name="y">238</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkSwitch" id="SMPS2UseCounts">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="active">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">1110</property>
+                    <property name="y">280</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Serial Delay</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">894</property>
+                    <property name="y">325</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS2BeamTransitTime">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">4</property>
+                  </object>
+                  <packing>
+                    <property name="x">1110</property>
+                    <property name="y">78</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS2EffectiveLength">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">13</property>
+                  </object>
+                  <packing>
+                    <property name="x">1110</property>
+                    <property name="y">158</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="SMPS2SerialDelay">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">1</property>
+                  </object>
+                  <packing>
+                    <property name="x">1110</property>
+                    <property name="y">318</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Wet DMA Diameter Shifting
+</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell Bold 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">582</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Diameter Size (nm)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">614</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="Diameter1">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">15</property>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">646</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="Diameter2">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">20</property>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">686</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="Diameter3">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">30</property>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">726</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="Diameter4">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">40</property>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">766</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="Diameter5">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">50</property>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">806</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Wet DMA Diameter
+Minimum Array (nm)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">246</property>
+                    <property name="y">598</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="DiameterMin1">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">10</property>
+                  </object>
+                  <packing>
+                    <property name="x">246</property>
+                    <property name="y">646</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="DiameterMin2">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">14</property>
+                  </object>
+                  <packing>
+                    <property name="x">246</property>
+                    <property name="y">686</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="DiameterMin3">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">21</property>
+                  </object>
+                  <packing>
+                    <property name="x">246</property>
+                    <property name="y">726</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="DiameterMin4">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">28</property>
+                  </object>
+                  <packing>
+                    <property name="x">246</property>
+                    <property name="y">766</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="DiameterMin5">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">35</property>
+                  </object>
+                  <packing>
+                    <property name="x">246</property>
+                    <property name="y">806</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="DiameterMax1">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">37.5</property>
+                  </object>
+                  <packing>
+                    <property name="x">462</property>
+                    <property name="y">646</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Wet DMA Diameter
+Maximum Array (nm)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">462</property>
+                    <property name="y">598</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="DiameterMax2">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">50</property>
+                  </object>
+                  <packing>
+                    <property name="x">462</property>
+                    <property name="y">686</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="DiameterMax3">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">75</property>
+                  </object>
+                  <packing>
+                    <property name="x">462</property>
+                    <property name="y">726</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="DiameterMax4">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">100</property>
+                  </object>
+                  <packing>
+                    <property name="x">462</property>
+                    <property name="y">766</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="DiameterMax5">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">125</property>
+                  </object>
+                  <packing>
+                    <property name="x">462</property>
+                    <property name="y">806</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="VoltageMin1">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">678</property>
+                    <property name="y">646</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="VoltageMin2">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">678</property>
+                    <property name="y">686</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="VoltageMin3">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">678</property>
+                    <property name="y">726</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="VoltageMin4">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">678</property>
+                    <property name="y">766</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="VoltageMin5">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">678</property>
+                    <property name="y">806</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="VoltageMax1">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">894</property>
+                    <property name="y">646</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="VoltageMax2">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">894</property>
+                    <property name="y">686</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="VoltageMax3">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">894</property>
+                    <property name="y">726</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="VoltageMax4">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">894</property>
+                    <property name="y">766</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="VoltageMax5">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">894</property>
+                    <property name="y">806</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Minimum Voltage (V)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">678</property>
+                    <property name="y">614</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Maximum Voltage (V)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">894</property>
+                    <property name="y">614</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="ClassifierVoltage1">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">1110</property>
+                    <property name="y">646</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Classifier Voltage (V)</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">1110</property>
+                    <property name="y">614</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="ClassifierVoltage2">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">1110</property>
+                    <property name="y">686</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="ClassifierVoltage3">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">1110</property>
+                    <property name="y">726</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="ClassifierVoltage4">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">1110</property>
+                    <property name="y">766</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="ClassifierVoltage5">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">1110</property>
+                    <property name="y">806</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="Diameter6">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">100</property>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">846</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="DiameterMin6">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">70</property>
+                  </object>
+                  <packing>
+                    <property name="x">246</property>
+                    <property name="y">846</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="DiameterMax6">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="text" translatable="yes">250</property>
+                  </object>
+                  <packing>
+                    <property name="x">462</property>
+                    <property name="y">846</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="VoltageMin6">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">678</property>
+                    <property name="y">846</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="VoltageMax6">
+                    <property name="width_request">100</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">894</property>
+                    <property name="y">846</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="ClassifierVoltage6">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">1110</property>
+                    <property name="y">846</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="name">SMPS 2 Control</property>
+                <property name="title" translatable="yes">SMPS 2 Control</property>
+                <property name="position">3</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkFixed" id="SMPSAerosolSizeDistribution">
+                <property name="width_request">32</property>
+                <property name="height_request">32</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <child>
+                  <object class="GtkGrid">
+                    <property name="width_request">1640</property>
+                    <property name="height_request">820</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child>
+                      <object class="GtkBox" id="Inverted">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="hexpand">True</property>
+                        <property name="vexpand">True</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <placeholder/>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="left_attach">0</property>
+                        <property name="top_attach">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox" id="Lcurve">
+                        <property name="width_request">820</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="hexpand">True</property>
+                        <property name="vexpand">True</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <placeholder/>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="left_attach">0</property>
+                        <property name="top_attach">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkTextView" id="Table">
+                        <property name="name">AerosolSizeDistributionParameters</property>
+                        <property name="width_request">820</property>
+                        <property name="height_request">500</property>
+                        <property name="visible">True</property>
+                        <property name="sensitive">False</property>
+                        <property name="can_focus">True</property>
+                        <property name="editable">False</property>
+                        <property name="wrap_mode">char</property>
+                        <property name="cursor_visible">False</property>
+                        <property name="buffer">textbuffer1</property>
+                        <property name="accepts_tab">False</property>
+                        <property name="monospace">True</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="top_attach">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox" id="ResponsePlot">
+                        <property name="height_request">500</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <placeholder/>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="top_attach">0</property>
+                      </packing>
+                    </child>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="name">Sizedist</property>
+                <property name="title" translatable="yes">SMPS Aerosol Size Distribution</property>
+                <property name="position">4</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkFixed" id="HTDMASizeDistribution">
+                <property name="width_request">32</property>
+                <property name="height_request">32</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <child>
+                  <object class="GtkGrid">
+                    <property name="width_request">1600</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child>
+                      <object class="GtkBox" id="HTDMAAerosolSizeDistribution1">
+                        <property name="width_request">800</property>
+                        <property name="height_request">166</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <placeholder/>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="left_attach">0</property>
+                        <property name="top_attach">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox" id="HTDMAAerosolSizeDistribution2">
+                        <property name="height_request">166</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <placeholder/>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="left_attach">0</property>
+                        <property name="top_attach">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox" id="HTDMAAerosolSizeDistribution3">
+                        <property name="height_request">166</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <placeholder/>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="left_attach">0</property>
+                        <property name="top_attach">2</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox" id="HTDMAGFDistribution1">
+                        <property name="width_request">820</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <placeholder/>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="top_attach">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox" id="HTDMAGFDistribution2">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <placeholder/>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="top_attach">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox" id="HTDMAAerosolSizeDistribution4">
+                        <property name="height_request">166</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <placeholder/>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="left_attach">0</property>
+                        <property name="top_attach">3</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox" id="HTDMAAerosolSizeDistribution5">
+                        <property name="height_request">166</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <placeholder/>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="left_attach">0</property>
+                        <property name="top_attach">4</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox" id="HTDMAGFDistribution3">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <placeholder/>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="top_attach">2</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox" id="HTDMAGFDistribution4">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <placeholder/>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="top_attach">3</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox" id="HTDMAGFDistribution5">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <placeholder/>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="top_attach">4</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox" id="HTDMAAerosolSizeDistribution6">
+                        <property name="width_request">800</property>
+                        <property name="height_request">166</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <placeholder/>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="left_attach">0</property>
+                        <property name="top_attach">5</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox" id="HTDMAGFDistribution6">
+                        <property name="width_request">800</property>
+                        <property name="height_request">166</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <placeholder/>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="top_attach">5</property>
+                      </packing>
+                    </child>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="name">HTDMA Aerosol Size Distribution</property>
+                <property name="title" translatable="yes">HTDMA Aerosol Size Distribution</property>
+                <property name="position">5</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="resize">False</property>
+            <property name="shrink">True</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

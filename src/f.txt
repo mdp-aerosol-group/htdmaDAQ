@@ -1,0 +1,6 @@
+2×5 DataFrame
+ Row │ Timestamp  Ncpc      N        A        V
+     │ String     Float64?  Float64  Float64  Float64
+─────┼────────────────────────────────────────────────
+   1 │ 11:19           1.0      0.0      0.0      0.0
+   2 │ 11:38           1.0      0.0      0.0      0.0
