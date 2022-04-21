@@ -24,27 +24,6 @@ function graph1(yaxis)
 end
 
 style = :solid
-plot1 = graph1(:lin)
-mp1,gplot1 = push_plot_to_gui!(plot1, gui["RHPlotDMA1"], wnd)
-wfrm = add(plot1, [0.0], [15.0], id="RHsh (%)")
-wfrm.line = line(color=black, width=2, style=style)
-wfrm = add(plot1, [0.0], [14.0], id="RHsa (%)")
-wfrm.line = line(color=red, width=2, style=style)
-plot1.layout[:halloc_legend] = 120
-
-plot2 = graph1(:lin)
-mp2,gplot2 = push_plot_to_gui!(plot2, gui["RHPlotDMA2"], wnd)
-wfrm = add(plot2, [0.0], [0.0], id="Tdsh (°C)")
-wfrm.line = line(color=mgrey, width=2, style=style)
-wfrm = add(plot2, [0.0], [0.0], id="Tdsa (°C)")
-wfrm.line = line(color=mblue, width=2, style=style)
-plot2.layout[:halloc_legend] = 120
-
-plot3 = graph1(:lin)
-mp3,gplot3 = push_plot_to_gui!(plot3, gui["RHPlotColumn"], wnd)
-wfrm = add(plot3, [0.0], [20.0], id="RH column (%)")
-wfrm.line = line(color=black, width=2, style=style)
-plot3.layout[:halloc_legend] = 130
 
 plot4 = InspectDR.Plot2D(:log,:lin, title="")
 InspectDR.overwritefont!(plot4.layout, fontname="Helvetica", fontscale=1.0)
@@ -79,67 +58,6 @@ wfrm = add(plot4, [0.0], [0.0], id="Max D")
 wfrm.line = line(color=black, width=2, style=:solid)
 
 graph = plot4.strips[1]
-graph.grid = InspectDR.GridRect(vmajor=true, vminor=true, 
-								hmajor=true, hminor =true)
-
-plot5 = InspectDR.Plot2D(:log,:lin, title="")
-InspectDR.overwritefont!(plot5.layout, fontname="Helvetica", fontscale=1.0)
-plot5.layout[:enable_legend] = true
-plot5.layout[:halloc_legend] = 170
-plot5.layout[:halloc_left] = 50
-plot5.layout[:enable_timestamp] = false
-plot5.layout[:length_tickmajor] = 10
-plot5.layout[:length_tickminor] = 6
-plot5.layout[:format_xtick] = InspectDR.TickLabelStyle(UEXPONENT)
-plot5.layout[:frame_data] =  InspectDR.AreaAttributes(
-       line=InspectDR.line(style=:solid, color=black, width=0.5))
-plot5.layout[:line_gridmajor] = InspectDR.LineStyle(:solid, Float64(0.75), 
-												   RGBA(0, 0, 0, 1))
-
-plot5.xext = InspectDR.PExtents1D()
-plot5.xext_full = InspectDR.PExtents1D(8, 600)
-
-a = plot5.annotation
-a.xlabel = "Diameter (nm)"
-a.ylabels = ["Inverted dN/dlnD (cm-3)"]
-mp5,gplot5 = push_plot_to_gui!(plot5, gui["Inverted"], wnd)
-wfrm = add(plot5, [0.0], [0.0], id="Current Scan")
-wfrm.line = line(color=black, width=2, style=style)
-wfrm = add(plot5, [0.0], [0.0], id="Past Scan")
-wfrm.line = line(color=mblue, width=2, style=style)
-
-graph = plot5.strips[1]
-graph.grid = InspectDR.GridRect(vmajor=true, vminor=true, 
-								hmajor=true, hminor =true)
-
-
-plot6 = InspectDR.Plot2D(:log,:log, title="")
-InspectDR.overwritefont!(plot6.layout, fontname="Helvetica", fontscale=1.0)
-plot6.layout[:enable_legend] = true
-plot6.layout[:halloc_legend] = 170
-plot6.layout[:halloc_left] = 50
-plot6.layout[:enable_timestamp] = false
-plot6.layout[:length_tickmajor] = 10
-plot6.layout[:length_tickminor] = 6
-plot6.layout[:format_xtick] = InspectDR.TickLabelStyle(UEXPONENT)
-plot6.layout[:frame_data] =  InspectDR.AreaAttributes(
-       line=InspectDR.line(style=:solid, color=black, width=0.5))
-plot6.layout[:line_gridmajor] = InspectDR.LineStyle(:solid, Float64(0.75), 
-												   RGBA(0, 0, 0, 1))
-
-plot6.xext = InspectDR.PExtents1D()
-plot6.xext_full = InspectDR.PExtents1D(5,50)
-
-a = plot6.annotation
-a.xlabel = "L1"
-a.ylabels = ["L2"]
-mp6,gplot6 = push_plot_to_gui!(plot6, gui["Lcurve"], wnd)
-wfrm = add(plot6, [1.0], [1.0], id="L-curve")
-wfrm.line = line(color=black, width=2, style=style)
-wfrm = add(plot6, [1.0], [1.0], id="Lambda-opt")
-wfrm.glyph = glyph(shape = :o, size = 10, color = mblue)
-
-graph = plot6.strips[1]
 graph.grid = InspectDR.GridRect(vmajor=true, vminor=true, 
 								hmajor=true, hminor =true)
 
@@ -379,5 +297,15 @@ plotGF6.layout[:halloc_legend] = 120
 plotGF6.xext = InspectDR.PExtents1D()
 plotGF6.xext_full = InspectDR.PExtents1D(0.5, 2.5)
 
+style = :solid 
+plotTemp = graph1(:lin)
+plotTemp.layout[:halloc_legend] = 110
+mpTemp,gplotTemp = push_plot_to_gui!(plotTemp, gui["TempGraph1"], wnd)
+wfrm = add(plotTemp, [0.0], [22.0], id="Set T(°C)")
+wfrm.line = line(color=black, width=2, style=style)
+wfrm = add(plotTemp, [0.0], [22.0], id="T1 (°C)")
+wfrm.line = line(color=mblue, width=2, style=style)
+wfrm = add(plotTemp, [0.0], [22.0], id="T2 (°C)")
+wfrm.line = line(color=red, width=2, style=style)
 
 Gtk.showall(wnd);

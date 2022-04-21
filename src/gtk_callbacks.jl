@@ -101,7 +101,6 @@ signal_connect(sbox, "changed") do widget, others...
 	v = get_gtk_property(sbox, :active_id, String) 
 	push!(instrumentStateChanged,instrumentStateChanged.value+1)
 end
-id0 = signal_connect(setCalibrationSwitch, gui["CalibrationSwitch"], "state-set")
 id2 = signal_connect(SMPS1startDiameterChanged, gui["SMPS1StartDiameter"], "focus-out-event")
 id3 = signal_connect(SMPS1endDiameterChanged, gui["SMPS1EndDiameter"], "focus-out-event")
 id4 = signal_connect(SMPS2startDiameterChanged, gui["SMPS2StartDiameter"], "focus-out-event")
@@ -142,6 +141,16 @@ function set_voltage_SMPS(source::String, destination::String, SMPS::Int)
 	set_gtk_property!(gui[destination], :text, @sprintf("%0.0f", V))
 end
 
+function get_DMA_dimensions(column)
+    (column == :TSI) && ((r₁, r₂, l) = (9.37e-3, 1.961e-2, 0.44369))
+    (column == :HFDMA) && ((r₁, r₂, l) = (0.05, 0.058, 0.6))
+    (column == :RDMA) && ((r₁, r₂, l) = (2.4e-3, 50.4e-3, 10e-3))
+    (column == :HELSINKI) && ((r₁, r₂, l) = (2.65e-2, 3.3e-2, 10.9e-2))
+    (column == :VIENNA) && ((r₁, r₂, l) = (9.37e-3, 1.961e-2, 0.44369))
+    form = (column == :RDMA) ? :radial : :cylindrical
+	return r₁, r₂, l, form 
+end
+
 function set_SMPS1_config()
 	t = parse_box("ThermoTemp", 22.0)+273.15
 	p = parse_box("ThermoPressure", 1001.0)*100.0
@@ -152,8 +161,7 @@ function set_SMPS1_config()
 	polarity = :-
 	m = 6
 
-	(r₁,r₂,l) = (9.37e-3,1.961e-2,0.44369)
-	form = :cylindrical
+	r₁, r₂, l, form = get_DMA_dimensions(:TSI) 
 	global Λ₁ˢᵐᵖˢ = DMAconfig(t,p,qsa,qsh,r₁,r₂,l,leff,polarity,m,form) 
 	v₁,v₂ = 10,10000      
 	z₁,z₂ = vtoz(Λ₁ˢᵐᵖˢ,v₂), vtoz(Λ₁ˢᵐᵖˢ,v₁)
@@ -172,14 +180,12 @@ function set_SMPS2_config()
 	polarity = :-
 	m = 6
 
-	(r₁,r₂,l) = (9.37e-3,1.961e-2,0.44369)
-	form = :cylindrical
+	r₁, r₂, l, form = get_DMA_dimensions(:HELSINKI) 
 	global Λ₂ˢᵐᵖˢ = DMAconfig(t,p,qsa,qsh,r₁,r₂,l,leff,polarity,m,form) 
 	v₁,v₂ = 10,10000      
 	z₁,z₂ = vtoz(Λ₂ˢᵐᵖˢ,v₂), vtoz(Λ₂ˢᵐᵖˢ,v₁)
 	global δ₂ˢᵐᵖˢ = setupDMA(Λ₁ˢᵐᵖˢ, z₁, z₂, bins)
 	N = zeros(length(δ₂ˢᵐᵖˢ.Dp))
-	#global ℝ₂[1] = SizeDistribution([[]],δ₂ˢᵐᵖˢ.De,δ₂ˢᵐᵖˢ.Dp,δ₂ˢᵐᵖˢ.ΔlnD,N,N,:response)
 end
 
 
@@ -232,3 +238,55 @@ set_voltage_SMPS("Diameter3", "ClassifierVoltage3", 1)      # Map Diameter to Vo
 set_voltage_SMPS("Diameter4", "ClassifierVoltage4", 1)      # Map Diameter to Voltage
 set_voltage_SMPS("Diameter5", "ClassifierVoltage5", 1)      # Map Diameter to Voltage
 set_voltage_SMPS("Diameter6", "ClassifierVoltage6", 1)      # Map Diameter to Voltage
+
+te1Mode = gui["TE1Mode"]
+signal_connect(te1Mode, "changed") do widget, others...
+	push!(stateTE1,get_gtk_property(te1Mode, "active-id", String) |> Symbol)	
+end
+
+updatePower = Signal(false)
+te1Power = gui["power"]
+signal_connect(te1Power, "state-set") do widget, others...
+    push!(updatePower, true)
+end
+
+updateBandwidth = Signal(false)
+te1Proportional = gui["proportional"]
+signal_connect(te1Proportional, "changed") do widget, others...
+    push!(updateBandwidth, true)
+end
+
+updateIntegral = Signal(false)
+te1Integral = gui["integral"]
+signal_connect(te1Integral, "changed") do widget, others...
+    push!(updateIntegral, true)
+end
+
+updateDerivative = Signal(false)
+te1Derivative = gui["derivative"]
+signal_connect(te1Derivative, "changed") do widget, others...
+    push!(updateDerivative, true)
+end
+
+updateThermistor = Signal(false)
+te1Thermistor = gui["thermistor"]
+signal_connect(te1Thermistor, "changed") do widget, others...
+    push!(updateThermistor, true)
+end
+
+updatePolarity = Signal(false)
+te1Polarity = gui["polarity"]
+signal_connect(te1Polarity, "changed") do widget, others...
+    push!(updatePolarity, true)
+end
+
+function set_dry_diameter(Dd, n)
+    set_gtk_property!(gui["Diameter$n"], :text, @sprintf("%.1f", Dd))
+    set_gtk_property!(gui["DiameterMin$n"], :text, @sprintf("%.1f", 0.3*Dd))
+    set_gtk_property!(gui["DiameterMax$n"], :text, @sprintf("%.1f", 1.5*Dd))
+	set_voltage_SMPS("DiameterMin$n", "VoltageMin$n", 2)   
+	set_voltage_SMPS("DiameterMax$n", "VoltageMax$n", 2)  
+	set_voltage_SMPS("Diameter$n", "ClassifierVoltage$n", 1)     
+end
+
+
