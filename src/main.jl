@@ -14,6 +14,7 @@ using CSV
 using FileIO
 using DifferentialMobilityAnalyzers
 using TETechTC3625RS232
+using RegularizationTools
 import NumericIO:UEXPONENT
 
 (@isdefined wnd) && destroy(wnd)      # Destroy window if exists
@@ -66,10 +67,23 @@ aCRef1 = map(
     _ -> set_gtk_property!(gui["ManualStateSelection"], "active-id", "HTDMA"),
     smpsCounter,
 )
+
 aCRef2 = map(
-    _ -> set_gtk_property!(gui["ManualStateSelection"], "active-id", "SMPS"),
-    htdmaCounter,
+    _ -> set_gtk_property!(gui["ManualStateSelection"], "active-id", "HTDMA"),
+    htdmaCounter
 )
+
+aCRef3 = map(
+    _ -> set_gtk_property!(gui["TE1Mode"], "active-id", "Ramp"),
+    smpsCounter,
+)
+
+maxl() = get_gtk_property(gui["duration1"], :value, Float64) * 60.0
+acRef4 = map(filter(s -> s > maxl(), TE1_elapsed_time)) do _
+    set_gtk_property!(gui["TE1Mode"], "active-id", "Manual")
+    set_gtk_property!(gui["ManualStateSelection"], "active-id", "SMPS")
+end
+
 
 signalV = map(v -> (v[1] / 1000.0, v[2] / 1000, false, false), V)
 #labjack_signals = map(v -> labjackReadWrite(v[1], v[2], v[3], v[4]), signalV)
@@ -86,9 +100,11 @@ oneHzHTDMALoop = map(filter(s -> s == "HTDMA", globalState)) do _
 end
 
 Gtk.showall(wnd)
-set_gtk_property!(gui["ManualStateSelection"], "active-id", "SMPS"),
+set_gtk_property!(gui["ManualStateSelection"], "active-id", "SMPS")
 
-Dds = [40, 50, 60, 70, 80, 90, 100]*1.0
+Dds = [20, 50, 60, 70, 80, 150, 200]*1.0
+Dds = ones(6).*100.0
 map(set_dry_diameter, Dds, 1:6)
+
 
 :DONE

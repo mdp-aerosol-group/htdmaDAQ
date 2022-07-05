@@ -4,6 +4,17 @@
 # Generates Reactive signals and defines SMPS post-processing
 # -
 
+function smooth(ℝ)
+	n = length(ℝ.N)
+	I = Array{Float64}(LinearAlgebra.I, (n, n)) 
+	Ψ₁ = setupRegularizationProblem(I, 2) 
+	lmbd = 5.0
+	ybar = solve(Ψ₁,ℝ₁.N, lmbd) 
+	yhat = to_general_form(Ψ₁, ℝ₁.N, ybar)
+	Dmode =  findmax(yhat)[2] |> i -> ℝ.Dp[i]
+	return Dmode, yhat 
+end	
+
 function smps_signals()
     function state(currentTime)
         holdTime1, scanTime1, flushTime1, scanLength1, startVoltage1, endVoltage1, c1 =
@@ -63,6 +74,14 @@ function smps_signals()
     end
 
     function smps_scan_termination(s)
+		Dmode, dist = smooth(ℝ₁)
+		Dds = ones(6).*Dmode*1.3
+		Dds = ones(6).*200.0
+		map(set_dry_diameter, Dds, 1:6)
+        plot4.data[2].ds.x = reverse(ℝ₁.Dp)
+        plot4.data[2].ds.y = reverse(dist)
+        refreshplot(gplot4)
+
         a = pwd() |> x -> split(x, "/")
         path = mapreduce(a -> "/" * a, *, a[2:3]) * "/Data/"
         try

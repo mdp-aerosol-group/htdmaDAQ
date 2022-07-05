@@ -211,10 +211,6 @@ function generic_loop()
     set_gtk_property!(gui["Nserial1"], :text, parse_missing(Nserial1))
     set_gtk_property!(gui["Nserial2"], :text, parse_missing(Nserial2))
 
-    TE1_T1 = TETechTC3625RS232.read_sensor_T1(portTE1)
-    TE1_T2 = TETechTC3625RS232.read_sensor_T2(portTE1)
-
-
     if updatePower.value == true
         value = get_gtk_property(gui["power"], :state, Bool)
         ret = (value == true) ? TETechTC3625RS232.turn_power_on(portTE1) : TETechTC3625RS232.turn_power_off(portTE1)
@@ -261,7 +257,7 @@ function generic_loop()
     TE1_T1 = TETechTC3625RS232.read_sensor_T1(portTE1)
     TE1_T2 = TETechTC3625RS232.read_sensor_T2(portTE1)
     Power = TETechTC3625RS232.read_power_output(portTE1)
-    #TETechTC3625RS232.set_temperature(portTE1, TE1setT.value)
+    TETechTC3625RS232.set_temperature(portTE1, TE1setT.value)
      
     mode = get_gtk_property(te1Mode, "active-id", String) |> Symbol
     (mode == :Ramp) && set_gtk_property!(gui["TERampCounter1"],:text,@sprintf("%.1f",TE1_elapsed_time.value))
