@@ -14,25 +14,25 @@ function tenHz_daq_loop()
     set_gtk_property!(gui["Ncounts2"], :text, @sprintf("%0.1f", N2cpcCount))
 
     # Convert AIN signal to RH,T,P for channels AIN0 and AIN1
-    RH1, T1, Td1 = AIN2HC(AIN, 1, 2)
+    RH1, T1, Td1 = AIN2HC(AIN, 5, 6)
     set_gtk_property!(gui["RHsh1"], :text, @sprintf("%0.1f", RH1))
     set_gtk_property!(gui["Tsh1"], :text, @sprintf("%0.1f", T1))
     set_gtk_property!(gui["Tdsh1"], :text, @sprintf("%0.1f", Td1))
 
     # Convert AIN signal to RH,T,P for channels AIN2 and AIN3
-    RH2, T2, Td2 = AIN2HC(AIN, 7, 8)
+    RH2, T2, Td2 = AIN2HC(AIN, 3, 4)
     set_gtk_property!(gui["RHsa1"], :text, @sprintf("%0.1f", RH2))
     set_gtk_property!(gui["Tsa1"], :text, @sprintf("%0.1f", T2))
     set_gtk_property!(gui["Tdsa1"], :text, @sprintf("%0.1f", Td2))
 
     # Convert AIN signal to RH,T,P for channels AIN4 and AIN5
-    RH3, T3, Td3 = AIN2HC(AIN, 5, 6)
+    RH3, T3, Td3 = AIN2HC(AIN, 1, 2)
     set_gtk_property!(gui["RHsh2"], :text, @sprintf("%0.1f", RH3))
     set_gtk_property!(gui["Tsh2"], :text, @sprintf("%0.1f", T3))
     set_gtk_property!(gui["Tdsh2"], :text, @sprintf("%0.1f", Td3))
 
     # Convert AIN signal to RH,T,P for channels AIN6 and AIN7
-    RH4, T4, Td4 = AIN2HC(AIN, 3, 4)
+    RH4, T4, Td4 = AIN2HC(AIN, 7, 8)
     set_gtk_property!(gui["RHsa2"], :text, @sprintf("%0.1f", RH4))
     set_gtk_property!(gui["Tsa2"], :text, @sprintf("%0.1f", T4))
     set_gtk_property!(gui["Tdsa2"], :text, @sprintf("%0.1f", Td4))

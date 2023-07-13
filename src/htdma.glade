@@ -3691,7 +3691,7 @@ Maximum Array (nm)</property>
                   <object class="GtkEntry" id="Diameter6">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="text" translatable="yes">100</property>
+                    <property name="text" translatable="yes">30</property>
                   </object>
                   <packing>
                     <property name="x">30</property>
@@ -3702,7 +3702,7 @@ Maximum Array (nm)</property>
                   <object class="GtkEntry" id="DiameterMin6">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="text" translatable="yes">70</property>
+                    <property name="text" translatable="yes">21</property>
                   </object>
                   <packing>
                     <property name="x">246</property>
@@ -3713,7 +3713,7 @@ Maximum Array (nm)</property>
                   <object class="GtkEntry" id="DiameterMax6">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="text" translatable="yes">250</property>
+                    <property name="text" translatable="yes">75</property>
                   </object>
                   <packing>
                     <property name="x">462</property>

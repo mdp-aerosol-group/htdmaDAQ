@@ -75,10 +75,15 @@ aCRef2 = map(
     _ -> set_gtk_property!(gui["ManualStateSelection"], "active-id", "HTDMA"),
     htdmaCounter,
 )
-aCRef3 = map(_ -> push!(CalibrationSwitch, true), filter(s -> s == 6, htdma_diam_number))
-aCRef4 = map(_ -> push!(CalibrationSwitch, false), filter(s -> s != 6, htdma_diam_number))
-push!(CalibrationSwitch, false)
-signalV = map(v -> (v[2] / 1000.0, v[1] / 1000, false, false), V)
+#aCRef3 = map(_ -> push!(CalibrationSwitch, true), filter(s -> s == 6, htdma_diam_number))
+#aCRef4 = map(_ -> push!(CalibrationSwitch, false), filter(s -> s != 6, htdma_diam_number))
+#push!(CalibrationSwitch, false)
+
+foo = every(30.0)
+aCRef5 = map(_ -> push!(CalibrationSwitch, ~CalibrationSwitch.value), foo)
+
+#signalV = map(v -> (v[2] / 1000.0, v[1] / 1000, false, false), V)
+signalV = map(v -> (v[1] / 1000.0, v[2] / 1000, false, false), V)
 labjack_signals = map(v -> labjackReadWrite(v[1], v[2], v[3], v[4]), signalV)
 main_elapsed_time = foldp(+, 0.0, oneHz)
 
@@ -120,5 +125,6 @@ end
 Gtk.showall(wnd)
 
 set_gtk_property!(gui["ManualStateSelection"], "active-id", "HTDMA"),
+
 
 :DONE
