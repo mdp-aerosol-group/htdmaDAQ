@@ -16,8 +16,7 @@ using FileIO
 using LabjackU6Library
 using DifferentialMobilityAnalyzers
 using TETechTC3625RS232
-using GEOptiSonde
-
+using NumericIO
 
 (@isdefined wnd) && destroy(wnd)      # Destroy window if exists
 gui = GtkBuilder(filename = pwd() * "/htdma.glade")  # Load the GUI template
@@ -29,7 +28,6 @@ include("gtk_graphs.jl")              # Graph I/O on GTK backend
 include("cpc_serial_io.jl")           # CPC I/O functions
 include("polyscience_io.jl")          # Polyscience Bath I/O functions
 include("labjack_io.jl")              # Labjack I/O functions
-include("solenoid_io.jl")             # Labjack U3 solenoid I/O functions
 include("initialize_hardware.jl")     # Hardware pointers to LJ and Serial Ports
 include("set_gui_initial_state.jl")   # Initialze graphs and computed fields
 include("daq_loops.jl")               # Data acquisistion functions
@@ -64,26 +62,18 @@ smpsRef = map(
     _ -> push!(smpsCounter, smpsCounter.value + 1),
     filter(s -> s[1] == "DONE", scan_state),
 )
-calRef = map(calibrate, CalibrationSwitch)
-
 
 aCRef1 = map(
-    _ -> set_gtk_property!(gui["ManualStateSelection"], "active-id", "HTDMA"),
+    _ -> set_gtk_property!(gui["ManualStateSelection"], "active-id", "SMPS"),
     smpsCounter,
 )
 aCRef2 = map(
     _ -> set_gtk_property!(gui["ManualStateSelection"], "active-id", "HTDMA"),
     htdmaCounter,
 )
-#aCRef3 = map(_ -> push!(CalibrationSwitch, true), filter(s -> s == 6, htdma_diam_number))
-#aCRef4 = map(_ -> push!(CalibrationSwitch, false), filter(s -> s != 6, htdma_diam_number))
-#push!(CalibrationSwitch, false)
 
-foo = every(30.0)
-aCRef5 = map(_ -> push!(CalibrationSwitch, ~CalibrationSwitch.value), foo)
-
-#signalV = map(v -> (v[2] / 1000.0, v[1] / 1000, false, false), V)
-signalV = map(v -> (v[1] / 1000.0, v[2] / 1000, false, false), V)
+signalV = map(v -> (v[2] / 1000.0, v[1] / 1000, false, false), V)
+sleep(0.5)
 labjack_signals = map(v -> labjackReadWrite(v[1], v[2], v[3], v[4]), signalV)
 main_elapsed_time = foldp(+, 0.0, oneHz)
 
@@ -124,7 +114,7 @@ end
 
 Gtk.showall(wnd)
 
-set_gtk_property!(gui["ManualStateSelection"], "active-id", "HTDMA"),
+set_gtk_property!(gui["ManualStateSelection"], "active-id", "SMPS"),
 
 
 :DONE

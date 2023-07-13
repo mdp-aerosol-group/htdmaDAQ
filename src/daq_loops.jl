@@ -6,8 +6,8 @@ function tenHz_daq_loop()
     # -
     AIN, Tk, rawcount, count = labjack_signals.value # Unpack signals
 
-    N1cpcCount = count[1] / tenHz.value / (flowRate1 * 16.6666666)   # Compute concentration
-    N2cpcCount = count[2] / tenHz.value / (flowRate2 * 16.6666666)   # Compute concentration
+    N1cpcCount = count[1] / tenHz.value / (1.0 * 16.6666666)   # Compute concentration
+    N2cpcCount = count[1] / tenHz.value / (1.0 * 16.6666666)   # Compute concentration
 
     # Dump to GUI
     set_gtk_property!(gui["Ncounts1"], :text, @sprintf("%0.1f", N1cpcCount))
@@ -108,7 +108,7 @@ function tenHz_daq_loop()
             :ColumnAverageT => ColumnAverageT,
             :ColumnAverageTd => ColumnAverageTd,
             :BathSetT => BathSetT,
-            :BathReadT1 =>  GEOptiSonde.Td.value[2],
+            :BathReadT1 =>  0.0,
             :N1cpcCount => N1cpcCount,
             :N2cpcCount => N2cpcCount,
             :N1cpcSerial => parse_box("Nserial1", missing),
@@ -277,8 +277,9 @@ function generic_loop()
 
     push!(datestr, Dates.format(now(), "yyyymmdd"))
     # CPC I/O
-    Nserial1 = readCPC(port1, CPCType1, flowRate1)
-    Nserial2 = readCPC(port2, CPCType2, flowRate2)
+    Nserial1 = readCPC(port2, CPCType2, flowRate2)
+    Nserial2 = Nserial1
+    # Nserial2 = readCPC(port2, CPCType2, flowRate2)
     #Nserial3 = readCPC(port3, CPCType3, flowRate3)
 
     set_gtk_property!(gui["Nserial1"], :text, parse_missing(Nserial1))
@@ -328,11 +329,10 @@ function generic_loop()
     set_gtk_property!(gui["BathSetT"], :text, parse_missing1(bath_set))
 
     bath_readT = TETechTC3625RS232.read_sensor_T1(portTE3)
-    GEOptiSonde.read(portOpti)
    
     set_gtk_property!(gui["BathReadT1"], :text, parse_missing1(bath_readT))
-    set_gtk_property!(gui["BathReadT2"], :text, parse_missing1(GEOptiSonde.Td.value[2]))
-    ColumnAverageTd = GEOptiSonde.Td.value[2]
+    set_gtk_property!(gui["BathReadT2"], :text, parse_missing1(missing))
+    ColumnAverageTd = 0.0
     set_gtk_property!(gui["ColumnDewPoint"], :text, parse_missing1(ColumnAverageTd))
     a, b, c, d = 6.1121, 18.678, 257.14, 234.5
     es = T -> 100.0 * a * exp((b - T / d) * (T / (c + T)))
