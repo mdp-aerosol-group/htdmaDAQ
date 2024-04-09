@@ -105,7 +105,7 @@
                     <property name="height-request">30</property>
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="active">4</property>
+                    <property name="active">0</property>
                     <property name="active-id">TSI7610</property>
                     <items>
                       <item id="TSI3771" translatable="yes">TSI 3771</item>
@@ -139,7 +139,7 @@
                     <property name="height-request">34</property>
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
-                    <property name="text" translatable="yes">0.3</property>
+                    <property name="text" translatable="yes">1.0</property>
                   </object>
                   <packing>
                     <property name="x">250</property>
@@ -167,7 +167,7 @@
                     <property name="can-focus">True</property>
                     <property name="hexpand">True</property>
                     <property name="vexpand">True</property>
-                    <property name="text" translatable="yes">/dev/ttyUSB0</property>
+                    <property name="text" translatable="yes">/dev/ttyUSB1</property>
                   </object>
                   <packing>
                     <property name="x">250</property>
@@ -179,7 +179,7 @@
                     <property name="width-request">180</property>
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="active">4</property>
+                    <property name="active">0</property>
                     <property name="active-id">0</property>
                     <items>
                       <item id="TSI3771" translatable="yes">TSI 3771</item>
@@ -271,7 +271,7 @@
                     <property name="can-focus">True</property>
                     <property name="hexpand">True</property>
                     <property name="vexpand">True</property>
-                    <property name="text" translatable="yes">/dev/ttyUSB1</property>
+                    <property name="text" translatable="yes">/dev/ttyUSB2</property>
                   </object>
                   <packing>
                     <property name="x">460</property>
@@ -362,7 +362,7 @@
                     <property name="can-focus">True</property>
                     <property name="hexpand">True</property>
                     <property name="vexpand">True</property>
-                    <property name="text" translatable="yes">/dev/ttyUSB2</property>
+                    <property name="text" translatable="yes">/dev/ttyUSB4</property>
                   </object>
                   <packing>
                     <property name="x">250</property>
@@ -1075,7 +1075,7 @@
                   <object class="GtkEntry" id="SMPS1SheathFlow">
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
-                    <property name="text" translatable="yes">10</property>
+                    <property name="text" translatable="yes">5</property>
                   </object>
                   <packing>
                     <property name="x">660</property>
@@ -1086,7 +1086,7 @@
                   <object class="GtkEntry" id="SMPS1SampleFlow">
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
-                    <property name="text" translatable="yes">1.3</property>
+                    <property name="text" translatable="yes">1.0</property>
                   </object>
                   <packing>
                     <property name="x">660</property>
