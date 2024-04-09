@@ -15,7 +15,7 @@ using FileIO
 using DifferentialMobilityAnalyzers
 using TETechTC3625RS232
 using RegularizationTools
-import NumericIO:UEXPONENT
+import NumericIO: UEXPONENT
 
 (@isdefined wnd) && destroy(wnd)      # Destroy window if exists
 gui = GtkBuilder(filename = pwd() * "/htdma.glade")  # Load the GUI template
@@ -23,20 +23,21 @@ wnd = gui["mainWindow"]               # Set the main window
 
 include("global_variables.jl")        # Reactive signals and global variables
 include("gtk_callbacks.jl")           # Link GTK GUI fields with code
+include("hv_io.jl")                   # Ultravolt calibration
 include("te_io.jl")                   # Thermoelectric Signals (wavefrom)
 include("gtk_graphs.jl")              # Graph I/O on GTK backend
 include("cpc_serial_io.jl")           # CPC I/O functions
-# include("labjack_io.jl")            # Labjack I/O functions
+include("labjack_io.jl")              # Labjack I/O functions
 include("initialize_hardware.jl")     # Hardware pointers to LJ and Serial Ports
 include("set_gui_initial_state.jl")   # Initialze graphs and computed fields
 include("daq_loops.jl")               # Data acquisistion functions
 include("smps_signals.jl")            # Logic for SMPS controls (Julia I and II)
 
-oneHz = fps(1.0  * 1.0015272)        # 1  Hz time
-tenHz = fps(10.0 * 1.015272)         # 10 Hz time
+oneHz = fps(1.0 * 1.0015272)          # 1  Hz time
+tenHz = fps(10.0 * 1.015272)          # 10 Hz time
 
-TE1_elapsed_time = foldp(+, 0.0, oneHz)   
-TE1setT, TE1reset = TE1_signals()           
+TE1_elapsed_time = foldp(+, 0.0, oneHz)
+TE1setT, TE1reset = TE1_signals()
 
 globalState =
     map(_ -> get_gtk_property(gui["ManualStateSelection"], "active-id", String), oneHz)
@@ -70,13 +71,10 @@ aCRef1 = map(
 
 aCRef2 = map(
     _ -> set_gtk_property!(gui["ManualStateSelection"], "active-id", "HTDMA"),
-    htdmaCounter
+    htdmaCounter,
 )
 
-aCRef3 = map(
-    _ -> set_gtk_property!(gui["TE1Mode"], "active-id", "Ramp"),
-    smpsCounter,
-)
+aCRef3 = map(_ -> set_gtk_property!(gui["TE1Mode"], "active-id", "Ramp"), smpsCounter)
 
 maxl() = get_gtk_property(gui["duration1"], :value, Float64) * 60.0
 acRef4 = map(filter(s -> s > maxl(), TE1_elapsed_time)) do _
@@ -84,9 +82,8 @@ acRef4 = map(filter(s -> s > maxl(), TE1_elapsed_time)) do _
     set_gtk_property!(gui["ManualStateSelection"], "active-id", "SMPS")
 end
 
-
-signalV = map(v -> (v[1] / 1000.0, v[2] / 1000, false, false), V)
-#labjack_signals = map(v -> labjackReadWrite(v[1], v[2], v[3], v[4]), signalV)
+signalV = map(v -> [getVdac(v[1], :+, true), getVdac(v[2], :+, true)], V)
+#labjack_signals = map(v -> labjackReadWrite(v[1], v[2], true, true), signalV)
 main_elapsed_time = foldp(+, 0.0, oneHz)
 
 oneHzGenericLoop = map(_ -> (@async generic_loop()), oneHz)
@@ -102,9 +99,8 @@ end
 Gtk.showall(wnd)
 set_gtk_property!(gui["ManualStateSelection"], "active-id", "SMPS")
 
-Dds = [20, 50, 60, 70, 80, 150, 200]*1.0
-Dds = ones(6).*100.0
+Dds = [20, 50, 60, 70, 80, 150, 200] * 1.0
+Dds = ones(6) .* 100.0
 map(set_dry_diameter, Dds, 1:6)
-
 
 :DONE

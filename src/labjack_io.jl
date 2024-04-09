@@ -132,8 +132,6 @@ function labjackReadWrite(Vdac1, Vdac2, FIOA, FIOB)
     calVdac2 = (calVdac2 > 0) ? calVdac2 : 0.0
     Vdac2 = (useCal2 == true) ? calVdac2 : Vdac2
 
-    setLJTDAC(HANDLE,caliInfoTdac,2,Vdac2,Vdac1)
-
     labjackSend(HANDLE,sendIt)
     labjackRead!(HANDLE,recordIt)
     AIN0 = calibrateAIN(caliInfo,recordIt,9,0,1,10,11,12)  # Calibrate AIN0

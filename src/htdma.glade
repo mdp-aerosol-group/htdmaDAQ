@@ -362,7 +362,7 @@
                     <property name="can-focus">True</property>
                     <property name="hexpand">True</property>
                     <property name="vexpand">True</property>
-                    <property name="text" translatable="yes">/dev/ttyUSB4</property>
+                    <property name="text" translatable="yes">/dev/ttyUSB3</property>
                   </object>
                   <packing>
                     <property name="x">250</property>
