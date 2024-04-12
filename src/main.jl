@@ -14,6 +14,7 @@ using CSV
 using FileIO
 using DifferentialMobilityAnalyzers
 using TETechTC3625RS232
+using LabjackU6Library
 using RegularizationTools
 import NumericIO: UEXPONENT
 
@@ -26,7 +27,7 @@ include("gtk_callbacks.jl")           # Link GTK GUI fields with code
 include("hv_io.jl")                   # Ultravolt calibration
 include("te_io.jl")                   # Thermoelectric Signals (wavefrom)
 include("gtk_graphs.jl")              # Graph I/O on GTK backend
-include("cpc_serial_io.jl")           # CPC I/O functions
+include("serial_io.jl")           # CPC I/O functions
 include("labjack_io.jl")              # Labjack I/O functions
 include("initialize_hardware.jl")     # Hardware pointers to LJ and Serial Ports
 include("set_gui_initial_state.jl")   # Initialze graphs and computed fields
@@ -35,6 +36,8 @@ include("smps_signals.jl")            # Logic for SMPS controls (Julia I and II)
 
 oneHz = fps(1.0 * 1.0015272)          # 1  Hz time
 tenHz = fps(10.0 * 1.015272)          # 10 Hz time
+
+sleep(15)
 
 TE1_elapsed_time = foldp(+, 0.0, oneHz)
 TE1setT, TE1reset = TE1_signals()
@@ -82,22 +85,27 @@ acRef4 = map(filter(s -> s > maxl(), TE1_elapsed_time)) do _
     set_gtk_property!(gui["ManualStateSelection"], "active-id", "SMPS")
 end
 
-signalV = map(v -> [getVdac(v[1], :+, true), getVdac(v[2], :+, true)], V)
-#labjack_signals = map(v -> labjackReadWrite(v[1], v[2], true, true), signalV)
+sleep(10)
+signalV = map(v -> [getVdac(v[2], :+, true), getVdac(v[1], :+, true)], V)
+labjack_signals = map(v -> labjackReadWrite(v[1], v[2], true, true), signalV)
 main_elapsed_time = foldp(+, 0.0, oneHz)
 
 oneHzGenericLoop = map(_ -> (@async generic_loop()), oneHz)
 oneHzInletLoop = map(_ -> (@async inlet()), htdma_scan_number)
+
+sleep(5)
 tenHzSMPSLoop = map(_ -> (@async tenHz_daq_loop()), tenHz)
+sleep(5)
 oneHzSMPSLoop = map(filter(s -> s == "SMPS", globalState)) do _
     @async oneHz_smps_loop()
 end
+sleep(8)
 oneHzHTDMALoop = map(filter(s -> s == "HTDMA", globalState)) do _
     @async oneHz_htdma_loop()
 end
 
 Gtk.showall(wnd)
-set_gtk_property!(gui["ManualStateSelection"], "active-id", "SMPS")
+set_gtk_property!(gui["ManualStateSelection"], "active-id", "HTDMA")
 
 Dds = [20, 50, 60, 70, 80, 150, 200] * 1.0
 Dds = ones(6) .* 100.0

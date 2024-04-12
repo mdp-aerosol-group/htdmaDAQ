@@ -62,9 +62,9 @@ graph.grid = InspectDR.GridRect(vmajor=true, vminor=true,
 								hmajor=true, hminor =true)
 
 
-a= pwd() |> x->split(x,"/")
-path = mapreduce(a->"/"*a,*,a[2:3])*"/Data/"
-outfile = path*"yyyymmdd_hhmm.csv"
+# a= pwd() |> x->split(x,"/")
+# path = mapreduce(a->"/"*a,*,a[2:3])*"/Data/"
+# outfile = path*"yyyymmdd_hhmm.csv"
 Gtk.set_gtk_property!(gui["DataFile"],:text,outfile)
 Gtk.set_gtk_property!(gui["SMPS1ScanNum"], :text, "0")
 Gtk.set_gtk_property!(gui["SMPS1ScanCount"], :text, "0")

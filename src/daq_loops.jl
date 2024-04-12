@@ -1,11 +1,9 @@
 function tenHz_daq_loop()
     # LABJACK Read 
-    # AIN, Tk, rawcount, count = labjack_signals.value 
-    # N1cpcCount = count[1] / tenHz.value / (flowRate1 * 16.6666666)  
-    # N2cpcCount = count[2] / tenHz.value / (flowRate2 * 16.6666666) 
+    AIN, Tk, rawcount, count = labjack_signals.value 
+    N1cpcCount = count[1] / tenHz.value / (flowRate1 * 16.6666666)  
+    N2cpcCount = count[2] / tenHz.value / (flowRate2 * 16.6666666) 
 
-    N1cpcCount = 0.0
-    N2cpcCount = 0.0
     set_gtk_property!(gui["Ncounts1"], :text, @sprintf("%0.1f", N1cpcCount))
     set_gtk_property!(gui["Ncounts2"], :text, @sprintf("%0.1f", N2cpcCount))
 
@@ -215,9 +213,10 @@ function generic_loop()
     t = main_elapsed_time.value
 
     push!(datestr, Dates.format(now(), "yyyymmdd"))
-    Nserial1 = readWriteCPC(port1, CPCType1, flowRate1, signalV.value[1])
-    Nserial2 = readWriteCPC(port2, CPCType2, flowRate2, signalV.value[2])
-
+    Nserial1 = readCPC(port1, CPCType1, flowRate1)[1]
+    Nserial2 = readCPC(port2, CPCType2, flowRate2)[1]
+    # Nserial1 = 0
+    # Nserial2 = 0
     set_gtk_property!(gui["Nserial1"], :text, parse_missing(Nserial1))
     set_gtk_property!(gui["Nserial2"], :text, parse_missing(Nserial2))
 
@@ -350,11 +349,6 @@ function resample((mDp, mN), (newDp, newDe))
 end
 
 function inlet()
-    Tinlet, RHinlet = poll_EL1050()
-    inletTd = try
-        Tdew(Tinlet, RHinlet)
-    catch
-        missing
-    end
-    set_gtk_property!(gui["InletTd"], :text, parse_missing(inletTd))
+    AIN, _, _, _ = labjackReadWrite(0.0, 0.0, false, false; HANDLE = HANDLE1)
+    RH, T, Td = AIN2HC(AIN, 1, 2)
 end

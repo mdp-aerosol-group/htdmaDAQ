@@ -1,8 +1,8 @@
 # Main Labjack 
 # Retain Potential Labjack support
-#(@isdefined HANDLE) || (HANDLE = openUSBConnection(-1))
-#caliInfo = getCalibrationInformation(HANDLE)
-#caliInfoTdac = getTdacCalibrationInformation(HANDLE,2)
+(@isdefined HANDLE) || (HANDLE = openUSBConnection(-1))
+caliInfo = getCalibrationInformation(HANDLE)
+(@isdefined HANDLE1) || (HANDLE1 = openUSBConnection(-1))
 
 CPCType1, flowRate1, port1 = configure_serial_port(1)
 CPCType2, flowRate2, port2 = configure_serial_port(2)
