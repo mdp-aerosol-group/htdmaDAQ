@@ -77,7 +77,7 @@ function smps_signals()
 		Dmode, dist = smooth(ℝ₁)
 		Dds = ones(6).*Dmode*1.3
 		Dds = ones(6).*200.0
-		map(set_dry_diameter, Dds, 1:6)
+		# map(set_dry_diameter, Dds, 1:6)
         plot4.data[2].ds.x = reverse(ℝ₁.Dp)
         plot4.data[2].ds.y = reverse(dist)
         refreshplot(gplot4)

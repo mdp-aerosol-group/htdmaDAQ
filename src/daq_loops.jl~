@@ -1,15 +1,15 @@
 function tenHz_daq_loop()
     # LABJACK Read 
-    AIN, Tk, rawcount, count = labjack_signals.value
-    N1cpcCount = count[1] / tenHz.value / (flowRate1 * 16.6666666)
-    N2cpcCount = count[2] / tenHz.value / (flowRate2 * 16.6666666)
+    AIN, Tk, rawcount, count = labjack_signals.value 
+    N1cpcCount = count[1] / tenHz.value / (flowRate1 * 16.6666666)  
+    N2cpcCount = count[2] / tenHz.value / (flowRate2 * 16.6666666) 
 
-    readV2 = AIN[1] .* 1000
-    readV1 = AIN[3] .* 1000
-
+    readV2 = AIN[1].*1000
+    readV1 = AIN[3].*1000
+    
     set_gtk_property!(gui["Ncounts1"], :text, @sprintf("%0.1f", N1cpcCount))
     set_gtk_property!(gui["Ncounts2"], :text, @sprintf("%0.1f", N2cpcCount))
-
+    
     set_gtk_property!(gui["SMPS1ReadV1"], :text, @sprintf("%0.1f", readV1))
     set_gtk_property!(gui["SMPS2ReadV1"], :text, @sprintf("%0.1f", readV2))
 
@@ -39,11 +39,9 @@ function tenHz_daq_loop()
             :LapseTime => @sprintf("%.3f", elapsed_time.value),
             :stateDMA1 => Symbol(scan_state.value[1]),
             :voltageSetDMA1 => V.value[1],
-            :voltageReadDMA1 => readV1,
             :currentDiameterDMA1 => Dp.value[1],
             :stateDMA2 => Symbol(scan_state.value[2]),
             :voltageSetDMA2 => V.value[2],
-            :voltageReadDMA2 => readV2,
             :currentDiameterDMA2 => Dp.value[2],
             :TESet => TE1setT.value,
             :TE1ReadT1 => TE1ReadT1,
@@ -359,28 +357,26 @@ end
 function inlet()
     AIN, _, _, _ = labjackReadWrite(0.0, 0.0, false, false; HANDLE = HANDLE1)
     RH, T, Td = AIN2HC(AIN, 1, 2)
-
+    
     set_gtk_property!(gui["readRH1"], :text, @sprintf("%0.1f", RH))
     set_gtk_property!(gui["readT1"], :text, @sprintf("%0.1f", T))
     set_gtk_property!(gui["readTd1"], :text, @sprintf("%0.1f", Td))
-
-    count = sum(dataBufferCounts[end])
-    set_gtk_property!(gui["POPSq"], :text, @sprintf("%0.2f", dataBufferQ[end]))
+    
+    set_gtk_property!(gui["POPSq"], :text, @sprintf("%0.1f", dataBufferQ[end]))
     set_gtk_property!(gui["POPSq1"], :text, @sprintf("%0.1f", dataBufferN[end]))
-    set_gtk_property!(gui["POPScount"], :text, @sprintf("%i", count))
 
     # set_gtk_property!(gui["UDPdata"], :text, get_packet())
-    t = main_elapsed_time.value
-    addpoint!(t, dataBufferN[end], POPSConc, gplotConc, 1, true)
-    addpoint!(t, dataBufferQ[end], POPSFlow, gplotFlow, 1, false)
-    graph = POPSFlow.strips[1]
-    graph.yext = InspectDR.PExtents1D()
-    graph.yext_full = InspectDR.PExtents1D(0.0, 0.5)
-    addpoint!(t, count, POPSCount, gplotCount, 1, true)
-    try
-        x = range(logmin, stop = logmax, length = nbins) |> collect
-        addseries!(exp10.(x), mean(dataBufferCounts), POPSHist, gplotHist, 1, true, true)
-    catch
-    end
+    # t = main_elapsed_time.value
+    # addpoint!(t, p.c, POPSConc, gplotConc, 1, true)
+    # addpoint!(t, p.q, POPSFlow, gplotFlow, 1, false)
+    # graph = POPSFlow.strips[1]
+    # graph.yext = InspectDR.PExtents1D() 
+    # graph.yext_full = InspectDR.PExtents1D(0.0, 10.0)
+    # addpoint!(t, sum(p.ph), POPSCount, gplotCount, 1, true)
+    # try
+    #     x = range(p.config[7], stop = p.config[8], length = p.nbins) |> collect
+    #     addseries!(exp10.(x), p.ph, POPSHist, gplotHist, 1, true, true)
+    # catch
+    # end
 
 end

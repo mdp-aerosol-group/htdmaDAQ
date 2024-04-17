@@ -838,7 +838,7 @@
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">Sensor 1</property>
+                    <property name="label" translatable="yes">Sensor 1 (%)</property>
                   </object>
                   <packing>
                     <property name="x">30</property>
@@ -849,7 +849,7 @@
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">Sensor 2</property>
+                    <property name="label" translatable="yes">Sensor 2 (%)</property>
                   </object>
                   <packing>
                     <property name="x">30</property>
@@ -860,7 +860,7 @@
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">Sensor 3</property>
+                    <property name="label" translatable="yes">Sensor 3 (%)</property>
                   </object>
                   <packing>
                     <property name="x">30</property>
@@ -868,7 +868,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkEntry" id="readRH">
+                  <object class="GtkEntry" id="readRH1">
                     <property name="width-request">180</property>
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
@@ -879,6 +879,146 @@
                   <packing>
                     <property name="x">250</property>
                     <property name="y">640</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="readRH2">
+                    <property name="width-request">180</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="editable">False</property>
+                  </object>
+                  <packing>
+                    <property name="x">250</property>
+                    <property name="y">680</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="readRH3">
+                    <property name="width-request">180</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="editable">False</property>
+                  </object>
+                  <packing>
+                    <property name="x">250</property>
+                    <property name="y">720</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="readT1">
+                    <property name="width-request">100</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="editable">False</property>
+                  </object>
+                  <packing>
+                    <property name="x">450</property>
+                    <property name="y">640</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="label" translatable="yes">T (°C)</property>
+                  </object>
+                  <packing>
+                    <property name="x">450</property>
+                    <property name="y">610</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="label" translatable="yes">Td (°C)</property>
+                  </object>
+                  <packing>
+                    <property name="x">640</property>
+                    <property name="y">610</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="readTd1">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="editable">False</property>
+                  </object>
+                  <packing>
+                    <property name="x">640</property>
+                    <property name="y">640</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="label" translatable="yes">RH (%)</property>
+                  </object>
+                  <packing>
+                    <property name="x">250</property>
+                    <property name="y">610</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="readT2">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="editable">False</property>
+                  </object>
+                  <packing>
+                    <property name="x">450</property>
+                    <property name="y">680</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="readT3">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="editable">False</property>
+                  </object>
+                  <packing>
+                    <property name="x">450</property>
+                    <property name="y">720</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="readTd2">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="editable">False</property>
+                  </object>
+                  <packing>
+                    <property name="x">640</property>
+                    <property name="y">680</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="readTd3">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="editable">False</property>
+                  </object>
+                  <packing>
+                    <property name="x">640</property>
+                    <property name="y">720</property>
                   </packing>
                 </child>
               </object>

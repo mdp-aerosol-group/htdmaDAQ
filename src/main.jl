@@ -12,6 +12,9 @@ using LinearAlgebra
 using Printf
 using CSV
 using FileIO
+using DataStructures
+using Chain
+
 using DifferentialMobilityAnalyzers
 using TETechTC3625RS232
 using LabjackU6Library
@@ -33,6 +36,7 @@ include("initialize_hardware.jl")     # Hardware pointers to LJ and Serial Ports
 include("set_gui_initial_state.jl")   # Initialze graphs and computed fields
 include("daq_loops.jl")               # Data acquisistion functions
 include("smps_signals.jl")            # Logic for SMPS controls (Julia I and II)
+include("pops_io.jl")                 # Logic for POPS data acquisition
 
 oneHz = fps(1.0 * 1.0015272)          # 1  Hz time
 tenHz = fps(10.0 * 1.015272)          # 10 Hz time
@@ -87,11 +91,13 @@ end
 
 sleep(10)
 signalV = map(v -> [getVdac(v[2], :+, true), getVdac(v[1], :+, true)], V)
+sleep(1)
 labjack_signals = map(v -> labjackReadWrite(v[1], v[2], true, true), signalV)
 main_elapsed_time = foldp(+, 0.0, oneHz)
 
 oneHzGenericLoop = map(_ -> (@async generic_loop()), oneHz)
-oneHzInletLoop = map(_ -> (@async inlet()), htdma_scan_number)
+sleep(2)
+oneHzInletLoop = map(_ -> (@async inlet()), oneHz)
 
 sleep(5)
 tenHzSMPSLoop = map(_ -> (@async tenHz_daq_loop()), tenHz)
@@ -104,11 +110,17 @@ oneHzHTDMALoop = map(filter(s -> s == "HTDMA", globalState)) do _
     @async oneHz_htdma_loop()
 end
 
+# POPS acquisition loops
+const daqLoop = map(_ -> acquire(), oneHz)
+sleep(6)
+const accLoop = map(_ -> accumulate(), oneHz)
+
+
 Gtk.showall(wnd)
 set_gtk_property!(gui["ManualStateSelection"], "active-id", "HTDMA")
 
 Dds = [20, 50, 60, 70, 80, 150, 200] * 1.0
-Dds = ones(6) .* 100.0
+Dds = ones(6) .* 10.0
 map(set_dry_diameter, Dds, 1:6)
 
 :DONE
