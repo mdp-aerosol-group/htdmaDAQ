@@ -6,6 +6,7 @@ function tenHz_daq_loop()
 
     readV2 = AIN[1] .* 1000
     readV1 = AIN[3] .* 1000
+    push!(Vr, abs.([readV1, readV2]))
 
     set_gtk_property!(gui["Ncounts1"], :text, @sprintf("%0.1f", N1cpcCount))
     set_gtk_property!(gui["Ncounts2"], :text, @sprintf("%0.1f", N2cpcCount))
@@ -71,11 +72,11 @@ function oneHz_htdma_loop()
     τ = parse_box("SMPS2BeamTransitTime", 4.0)
     correct = @. x ->
         -lambertw(-x * flowRate2 * 16.666τ * 1e-6, 0) / (flowRate2 * 16.6666 * τ * 1e-6)
-    if length(N[state.==:SCAN]) > τᶜ * 10 + 1
+    if length(N) > τᶜ * 10 + 1
         N = circshift(N, Int(round(-τᶜ * 10)))
-        N = N[(state.==:SCAN).|(state.==:FLUSH)]
+        N = N
         Ncpc = circshift(Ncpc, Int(round(-τᶜ * 10)))
-        Ncpc = Ncpc[(state.==:SCAN).|(state.==:FLUSH)]
+        Ncpc = Ncpc
         if (useCounts == true)
             N = try
                 correct(N)
@@ -83,7 +84,7 @@ function oneHz_htdma_loop()
                 N
             end
         end
-        Dp = Dp[(state.==:SCAN).|(state.==:FLUSH)]
+        Dp = Dp
         mDp = reverse(Dp[1:end-Int(round(τᶜ * 10))])
         mN = reverse(N[1:end-Int(round(τᶜ * 10))])
         mCPC = reverse(Ncpc[1:end-Int(round(τᶜ * 10))])

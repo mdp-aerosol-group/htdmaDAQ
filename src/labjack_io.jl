@@ -59,10 +59,10 @@ function setupLabjackBuffers(Vdac0, Vdac1, BitFIO3, BitFIO4)
     sendBuff[10+1] = 0 + 0 * 128  # Settling & Differential 
 
     # AIN1
-    sendBuff[11+1] = 2          # IOType is AIN24
-    sendBuff[12+1] = 1          # Channel 1
+    sendBuff[11+1] = 2           # IOType is AIN24
+    sendBuff[12+1] = 1           # Channel 1
     sendBuff[13+1] = 9 + 0 * 16   # Resolution & Gain
-    sendBuff[14+1] = 0 + 0 * 128  # Settling & Differential
+    sendBuff[14+1] = 0 + 0 * 128 # Settling & Differential
 
     # AIN2
     sendBuff[15+1] = 2          # IOType is AIN24
@@ -152,7 +152,7 @@ function setupLabjackBuffers(Vdac0, Vdac1, BitFIO3, BitFIO4)
     return send, rec
 end
 
-function labjackReadWrite(Vdac1, Vdac2, FIOA, FIOB; HANDLE = HANDLE)
+function labjackReadWrite(Vdac1, Vdac2, FIOA, FIOB; HANDLE = HANDLE, caliInfo = caliInfo)
     sendIt, recordIt = setupLabjackBuffers(Vdac1, Vdac2, true, true)
 
     labjackSend(HANDLE, sendIt)

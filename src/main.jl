@@ -90,7 +90,7 @@ acRef4 = map(filter(s -> s > maxl(), TE1_elapsed_time)) do _
 end
 
 sleep(10)
-signalV = map(v -> [getVdac(v[2], :+, true), getVdac(v[1], :+, true)], V)
+signalV = map(v -> [getVdac(v[2], :+, true), getVdac(v[1]*1.15, :+, true)], V)
 sleep(1)
 labjack_signals = map(v -> labjackReadWrite(v[1], v[2], true, true), signalV)
 main_elapsed_time = foldp(+, 0.0, oneHz)
@@ -120,7 +120,7 @@ Gtk.showall(wnd)
 set_gtk_property!(gui["ManualStateSelection"], "active-id", "HTDMA")
 
 Dds = [20, 50, 60, 70, 80, 150, 200] * 1.0
-Dds = ones(6) .* 10.0
+Dds = ones(6) .* 50.0
 map(set_dry_diameter, Dds, 1:6)
 
 :DONE

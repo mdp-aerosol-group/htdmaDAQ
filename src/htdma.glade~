@@ -1298,7 +1298,7 @@
                   <object class="GtkEntry" id="SMPS1PlumbTime">
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
-                    <property name="text" translatable="yes">2.2</property>
+                    <property name="text" translatable="yes">4.1</property>
                   </object>
                   <packing>
                     <property name="x">660</property>
@@ -1374,7 +1374,7 @@
                     <property name="width-request">168</property>
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
-                    <property name="text" translatable="yes">550</property>
+                    <property name="text" translatable="yes">100</property>
                   </object>
                   <packing>
                     <property name="x">250</property>
@@ -2282,7 +2282,7 @@
                   <object class="GtkEntry" id="SMPS2PlumbTime">
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
-                    <property name="text" translatable="yes">9.8</property>
+                    <property name="text" translatable="yes">4.1</property>
                   </object>
                   <packing>
                     <property name="x">678</property>
@@ -3251,50 +3251,6 @@ Maximum Array (nm)</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSpinButton" id="nbins">
-                    <property name="width-request">180</property>
-                    <property name="visible">True</property>
-                    <property name="can-focus">True</property>
-                    <property name="text" translatable="yes">500</property>
-                    <property name="climb-rate">1</property>
-                    <property name="value">500</property>
-                  </object>
-                  <packing>
-                    <property name="x">250</property>
-                    <property name="y">553</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkSpinButton" id="logmin">
-                    <property name="width-request">180</property>
-                    <property name="visible">True</property>
-                    <property name="can-focus">True</property>
-                    <property name="text" translatable="yes">2.00</property>
-                    <property name="climb-rate">1</property>
-                    <property name="digits">2</property>
-                    <property name="value">2</property>
-                  </object>
-                  <packing>
-                    <property name="x">250</property>
-                    <property name="y">593</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkSpinButton" id="logmax">
-                    <property name="width-request">180</property>
-                    <property name="visible">True</property>
-                    <property name="can-focus">True</property>
-                    <property name="text" translatable="yes">4.00</property>
-                    <property name="climb-rate">1</property>
-                    <property name="digits">2</property>
-                    <property name="value">4</property>
-                  </object>
-                  <packing>
-                    <property name="x">250</property>
-                    <property name="y">633</property>
-                  </packing>
-                </child>
-                <child>
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
@@ -3401,6 +3357,48 @@ Maximum Array (nm)</property>
                   <packing>
                     <property name="x">485</property>
                     <property name="y">655</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="nbins">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="editable">False</property>
+                    <property name="text" translatable="yes">200</property>
+                  </object>
+                  <packing>
+                    <property name="x">250</property>
+                    <property name="y">554</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="logmin">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="editable">False</property>
+                    <property name="text" translatable="yes">2</property>
+                  </object>
+                  <packing>
+                    <property name="x">250</property>
+                    <property name="y">594</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="logmax">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="editable">False</property>
+                    <property name="text" translatable="yes">4</property>
+                  </object>
+                  <packing>
+                    <property name="x">250</property>
+                    <property name="y">634</property>
                   </packing>
                 </child>
               </object>
@@ -3714,5 +3712,10 @@ Maximum Array (nm)</property>
         </child>
       </object>
     </child>
+  </object>
+  <object class="GtkAdjustment" id="adjustment8">
+    <property name="upper">100</property>
+    <property name="step-increment">1</property>
+    <property name="page-increment">10</property>
   </object>
 </interface>

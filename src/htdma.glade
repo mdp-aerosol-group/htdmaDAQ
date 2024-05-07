@@ -1298,7 +1298,7 @@
                   <object class="GtkEntry" id="SMPS1PlumbTime">
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
-                    <property name="text" translatable="yes">2.2</property>
+                    <property name="text" translatable="yes">4.1</property>
                   </object>
                   <packing>
                     <property name="x">660</property>
@@ -1374,7 +1374,7 @@
                     <property name="width-request">168</property>
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
-                    <property name="text" translatable="yes">550</property>
+                    <property name="text" translatable="yes">100</property>
                   </object>
                   <packing>
                     <property name="x">250</property>
@@ -2282,7 +2282,7 @@
                   <object class="GtkEntry" id="SMPS2PlumbTime">
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
-                    <property name="text" translatable="yes">9.8</property>
+                    <property name="text" translatable="yes">3.5</property>
                   </object>
                   <packing>
                     <property name="x">678</property>

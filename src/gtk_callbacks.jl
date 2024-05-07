@@ -180,7 +180,7 @@ function set_SMPS2_config()
 	polarity = :-
 	m = 6
 
-	r₁, r₂, l, form = get_DMA_dimensions(:HELSINKI) 
+	r₁, r₂, l, form = get_DMA_dimensions(:TSI) 
 	global Λ₂ˢᵐᵖˢ = DMAconfig(t,p,qsa,qsh,r₁,r₂,l,leff,polarity,m,form) 
 	v₁,v₂ = 10,10000      
 	z₁,z₂ = vtoz(Λ₂ˢᵐᵖˢ,v₂), vtoz(Λ₂ˢᵐᵖˢ,v₁)

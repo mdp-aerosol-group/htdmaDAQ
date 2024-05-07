@@ -5,17 +5,22 @@
 # -
 
 function smooth(ℝ)
-	n = length(ℝ.N)
-	I = Array{Float64}(LinearAlgebra.I, (n, n)) 
-	Ψ₁ = setupRegularizationProblem(I, 2) 
-	lmbd = 5.0
-	ybar = solve(Ψ₁,ℝ₁.N, lmbd) 
-	yhat = to_general_form(Ψ₁, ℝ₁.N, ybar)
-	Dmode =  findmax(yhat)[2] |> i -> ℝ.Dp[i]
-	return Dmode, yhat 
-end	
+    n = length(ℝ.N)
+    I = Array{Float64}(LinearAlgebra.I, (n, n))
+    Ψ₁ = setupRegularizationProblem(I, 2)
+    lmbd = 5.0
+    ybar = solve(Ψ₁, ℝ₁.N, lmbd)
+    yhat = to_general_form(Ψ₁, ℝ₁.N, ybar)
+    Dmode = findmax(yhat)[2] |> i -> ℝ.Dp[i]
+    return Dmode, yhat
+end
 
 function smps_signals()
+    function trianglewave(x, T, l, u)
+        modx = (mod(x, T) + T / 2)
+        return l + (u - l) * ifelse(modx < T, 2modx / T - 1, -2modx / T + 3)
+    end
+
     function state(currentTime)
         holdTime1, scanTime1, flushTime1, scanLength1, startVoltage1, endVoltage1, c1 =
             scan_parameters(1)
@@ -28,13 +33,22 @@ function smps_signals()
             scanStateSMPS1 = "DONE"
             scanStateSMPS2 = "NONE"
             (currentTime <= scanLength1) && (scanStateSMPS1 = "FLUSH")
-            (currentTime < scanTime1 + holdTime1) && (scanStateSMPS1 = "SCAN")
+            (currentTime < 2 * scanTime1 + holdTime1 + flushTime1) &&
+                (scanStateSMPS1 = "DOWNSCAN")
+            (currentTime < scanTime1 + holdTime1 + flushTime1) &&
+                (scanStateSMPS1 = "UPHOLD")
+            (currentTime < scanTime1 + holdTime1) && (scanStateSMPS1 = "UPSCAN")
             (currentTime <= holdTime1) && (scanStateSMPS1 = "HOLD")
         elseif globalState.value == "HTDMA"
             scanStateSMPS1 = "CLASSIFIER"
             scanStateSMPS2 = "DONE"
+
             (currentTime <= scanLength2) && (scanStateSMPS2 = "FLUSH")
-            (currentTime < scanTime2 + holdTime2) && (scanStateSMPS2 = "SCAN")
+            (currentTime < 2 * scanTime2 + holdTime2 + flushTime2) &&
+                (scanStateSMPS2 = "DOWNSCAN")
+            (currentTime < scanTime2 + holdTime2 + flushTime2) &&
+                (scanStateSMPS2 = "UPHOLD")
+            (currentTime < scanTime2 + holdTime2) && (scanStateSMPS2 = "UPSCAN")
             (currentTime <= holdTime2) && (scanStateSMPS2 = "HOLD")
         end
 
@@ -50,18 +64,59 @@ function smps_signals()
         myV1, myV2 = 10.0, 10.0
 
         if globalState.value == "SMPS"
-            ((scan_state.value[1] == "HOLD") && (t > 5)) && (myV1 = startVoltage1)
-            (scan_state.value[1] == "SCAN") &&
-                (myV1 = exp(log(startVoltage1) + c1 * (t - holdTime1)))
-            (scan_state.value[1] == "FLUSH") && (myV1 = endVoltage1)
-            (scan_state.value[1] == "DONE") && (myV1 = endVoltage1)
+            (scan_state.value[1] == "HOLD") && (myV1 = startVoltage1)
+            (scan_state.value[1] == "UPSCAN") && (
+                myV1 = exp(
+                    trianglewave(
+                        t - holdTime1,
+                        2 * scanTime1,
+                        log(startVoltage1),
+                        log(endVoltage1),
+                    ),
+                )
+            )
+            (scan_state.value[1] == "UPHOLD") && (myV1 = endVoltage1)
+            (scan_state.value[1] == "DOWNSCAN") && (
+                myV1 = exp(
+                    trianglewave(
+                        t - holdTime1 - flushTime1,
+                        2 * scanTime1,
+                        log(startVoltage1),
+                        log(endVoltage1),
+                    ),
+                )
+            )
+            (scan_state.value[1] == "FLUSH") && (myV1 = startVoltage1)
+            (scan_state.value[1] == "DONE") && (myV1 = startVoltage1)
+
             myV2 = 10.0
+
         elseif globalState.value == "HTDMA"
             (scan_state.value[2] == "HOLD") && (myV2 = startVoltage2)
-            (scan_state.value[2] == "SCAN") &&
-                (myV2 = exp(log(startVoltage2) + c2 * (t - holdTime2)))
-            (scan_state.value[2] == "FLUSH") && (myV2 = endVoltage2)
-            (scan_state.value[2] == "DONE") && (myV2 = endVoltage2)
+            (scan_state.value[2] == "UPSCAN") && (
+                myV2 = exp(
+                    trianglewave(
+                        t - holdTime2,
+                        2 * scanTime2,
+                        log(startVoltage2),
+                        log(endVoltage2),
+                    ),
+                )
+            )
+            (scan_state.value[2] == "UPHOLD") && (myV2 = endVoltage2)
+            (scan_state.value[2] == "DOWNSCAN") && (
+                myV2 = exp(
+                    trianglewave(
+                        t - holdTime2 - flushTime2,
+                        2 * scanTime2,
+                        log(startVoltage2),
+                        log(endVoltage2),
+                    ),
+                )
+            )
+            (scan_state.value[2] == "FLUSH") && (myV2 = startVoltage2)
+            (scan_state.value[2] == "DONE") && (myV2 = startVoltage2)
+
             myV1 =
                 get_gtk_property(
                     gui["ClassifierVoltage$(htdma_diam_number.value)"],
@@ -74,10 +129,10 @@ function smps_signals()
     end
 
     function smps_scan_termination(s)
-		Dmode, dist = smooth(ℝ₁)
-		Dds = ones(6).*Dmode*1.3
-		Dds = ones(6).*200.0
-		# map(set_dry_diameter, Dds, 1:6)
+        Dmode, dist = smooth(ℝ₁)
+        Dds = ones(6) .* Dmode * 1.3
+        Dds = ones(6) .* 200.0
+        # map(set_dry_diameter, Dds, 1:6)
         plot4.data[2].ds.x = reverse(ℝ₁.Dp)
         plot4.data[2].ds.y = reverse(dist)
         refreshplot(gplot4)
@@ -101,8 +156,8 @@ function smps_signals()
             tenHz_df |> CSV.write(outfile)
             set_gtk_property!(gui["DataFile"], :text, outfile)
 
-            push!(smps_scan_number, smps_scan_number.value += 1)   
-		end
+            push!(smps_scan_number, smps_scan_number.value += 1)
+        end
 
         delete!(tenHz_df, collect(1:length(tenHz_df[!, :Timestamp])))
     end
@@ -163,8 +218,10 @@ function smps_signals()
     end
 
     function voltageToDiameters(V)
-        Dp₁ = ztod(Λ₁ˢᵐᵖˢ, 1, vtoz(Λ₁ˢᵐᵖˢ, V[1]))
-        Dp₂ = ztod(Λ₂ˢᵐᵖˢ, 1, vtoz(Λ₂ˢᵐᵖˢ, V[2]))
+        Dp₁ = 10.0
+        Dp₂ = 10.0
+        (V[1] < 10) || (Dp₁ = ztod(Λ₁ˢᵐᵖˢ, 1, vtoz(Λ₁ˢᵐᵖˢ, V[1])))
+        (V[2] < 10) || (Dp₂ = ztod(Λ₂ˢᵐᵖˢ, 1, vtoz(Λ₂ˢᵐᵖˢ, V[2])))
         (Dp₁, Dp₂)
     end
 
@@ -191,8 +248,8 @@ function smps_signals()
     smps_termination = map(smps_scan_termination, filter(s -> s[1] == "DONE", scan_state))
     htdma_termination = map(htdma_scan_termination, filter(s -> s[2] == "DONE", scan_state))
     reset = map(s -> push!(elapsed_time, 0.0), filter(t -> t > get_length(), elapsed_time))
-    
-	return elapsed_time,
+
+    return elapsed_time,
     scan_state,
     smps_scan_number,
     htdma_scan_number,
@@ -212,12 +269,12 @@ function scan_parameters(n)
     flushTime =
         get_gtk_property(gui["SMPS$(n)FlushTime"], :text, String) |> x -> parse(Float64, x)
     startVoltage =
-        get_gtk_property(gui["SMPS$(n)StartVoltage"], :text, String) |>
+        get_gtk_property(gui["SMPS$(n)EndVoltage"], :text, String) |>
         x -> parse(Float64, x)
     endVoltage =
-        get_gtk_property(gui["SMPS$(n)EndVoltage"], :text, String) |> x -> parse(Float64, x)
+        get_gtk_property(gui["SMPS$(n)StartVoltage"], :text, String) |> x -> parse(Float64, x)
 
-    scanLength = holdTime + scanTime + flushTime
+    scanLength = holdTime + 2 * scanTime + flushTime
     c = log(endVoltage / startVoltage) / (scanTime)
 
     holdTime, scanTime, flushTime, scanLength, startVoltage, endVoltage, c
