@@ -130,4 +130,9 @@ Dds = [20, 50, 60, 70, 80, 150, 200] * 1.0
 Dds = ones(6) .* 50.0
 map(set_dry_diameter, Dds, 1:6)
 
+sleep(1)
+TC3625RS232.write_heat_multiplier(portTE1, 1.0)
+sleep(1)
+TC3625RS232.write_cool_multiplier(portTE1, 1.0)
+
 :DONE
