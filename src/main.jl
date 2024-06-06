@@ -30,13 +30,14 @@ include("gtk_callbacks.jl")           # Link GTK GUI fields with code
 include("hv_io.jl")                   # Ultravolt calibration
 include("te_io.jl")                   # Thermoelectric Signals (wavefrom)
 include("gtk_graphs.jl")              # Graph I/O on GTK backend
-include("serial_io.jl")           # CPC I/O functions
+include("serial_io.jl")               # CPC I/O functions
 include("labjack_io.jl")              # Labjack I/O functions
 include("initialize_hardware.jl")     # Hardware pointers to LJ and Serial Ports
 include("set_gui_initial_state.jl")   # Initialze graphs and computed fields
 include("daq_loops.jl")               # Data acquisistion functions
 include("smps_signals.jl")            # Logic for SMPS controls (Julia I and II)
 include("pops_io.jl")                 # Logic for POPS data acquisition
+include("valworx.jl")                 # Bypass for DMA 1 to run in SMPS mode
 
 oneHz = fps(1.0 * 1.0015272)          # 1  Hz time
 tenHz = fps(10.0 * 1.015272)          # 10 Hz time
@@ -49,6 +50,8 @@ TE1setT, TE1reset = TE1_signals()
 globalState =
     map(_ -> get_gtk_property(gui["ManualStateSelection"], "active-id", String), oneHz)
 
+smpsCounter, htdmaCounter = Signal(1), Signal(1)
+
 elapsed_time,
 scan_state,
 smps_scan_number,
@@ -60,7 +63,6 @@ reset,
 V,
 Dp = smps_signals()
 
-smpsCounter, htdmaCounter = Signal(1), Signal(1)
 
 stateReset = map(instrumentStateChanged) do _
     push!(elapsed_time, 0.0)
@@ -85,8 +87,12 @@ aCRef3 = map(_ -> set_gtk_property!(gui["TE1Mode"], "active-id", "Ramp"), smpsCo
 
 maxl() = get_gtk_property(gui["duration1"], :value, Float64) * 60.0
 acRef4 = map(filter(s -> s > maxl(), TE1_elapsed_time)) do _
-    set_gtk_property!(gui["TE1Mode"], "active-id", "Manual")
-    set_gtk_property!(gui["ManualStateSelection"], "active-id", "SMPS")
+    if globalState.value .== "HTDMA"
+        set_gtk_property!(gui["TE1Mode"], "active-id", "Manual")
+        push!(TE1_elapsed_time, 0.0)
+        delete!(tenHz_df, collect(1:length(tenHz_df[!, :Timestamp])))
+        set_gtk_property!(gui["ManualStateSelection"], "active-id", "SMPS")
+    end
 end
 
 sleep(10)
@@ -117,7 +123,8 @@ const accLoop = map(_ -> accumulate(), oneHz)
 
 
 Gtk.showall(wnd)
-set_gtk_property!(gui["ManualStateSelection"], "active-id", "HTDMA")
+set_gtk_property!(gui["ManualStateSelection"], "active-id", "SMPS")
+# set_gtk_property!(gui["ManualStateSelection"], "active-id", "HTDMA")
 
 Dds = [20, 50, 60, 70, 80, 150, 200] * 1.0
 Dds = ones(6) .* 50.0

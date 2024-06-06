@@ -157,25 +157,25 @@ function oneHz_htdma_loop()
 end
 
 function oneHz_smps_loop()
-    state = deepcopy(tenHz_df[!, :stateDMA1])
-    Dp = deepcopy(tenHz_df[!, :currentDiameterDMA1])
-    useCounts = get_gtk_property(gui["SMPS1UseCounts"], :state, Bool)
+    state = deepcopy(tenHz_df[!, :stateDMA2])
+    Dp = deepcopy(tenHz_df[!, :currentDiameterDMA2])
+    useCounts = get_gtk_property(gui["SMPS2UseCounts"], :state, Bool)
     N =
-        (useCounts == true) ? deepcopy(tenHz_df[!, :N1cpcCount]) :
-        deepcopy(tenHz_df[!, :N1cpcSerial])
-    τᶜ = get_gtk_property(gui["SMPS1PlumbTime"], :text, String) |> x -> parse(Float64, x)
+        (useCounts == true) ? deepcopy(tenHz_df[!, :N2cpcCount]) :
+        deepcopy(tenHz_df[!, :N2cpcSerial])
+    τᶜ = get_gtk_property(gui["SMPS2PlumbTime"], :text, String) |> x -> parse(Float64, x)
     τserial =
-        get_gtk_property(gui["SMPS1SerialDelay"], :text, String) |> x -> parse(Float64, x)
+        get_gtk_property(gui["SMPS2SerialDelay"], :text, String) |> x -> parse(Float64, x)
     (useCounts == false) && (τᶜ += τserial)
-    τ = parse_box("SMPS1BeamTransitTime", 4.0)
+    τ = parse_box("SMPS2BeamTransitTime", 4.0)
 
     correct = @. x ->
         -lambertw(-x * flowRate1 * 16.666τ * 1e-6, 0) / (flowRate1 * 16.6666 * τ * 1e-6)
     currentDiameter =
-        get_gtk_property(gui["SMPS1CurrentDiam"], :text, String) |> x -> parse(Float64, x)
-    if length(N[state.==:SCAN]) > τᶜ * 10 + 1
+        get_gtk_property(gui["SMPS2CurrentDiam"], :text, String) |> x -> parse(Float64, x)
+    if length(N) > τᶜ * 10 + 1
         N = circshift(N, Int(round(-τᶜ * 10)))
-        N = N[(state.==:SCAN).|(state.==:FLUSH)]
+        N = N
         if (useCounts == true)
             N = try
                 correct(N)
@@ -183,10 +183,9 @@ function oneHz_smps_loop()
                 N
             end
         end
-        Dp = Dp[(state.==:SCAN).|(state.==:FLUSH)]
+        Dp = Dp
         mDp = reverse(Dp[1:end-Int(round(τᶜ * 10))])
         mN = reverse(N[1:end-Int(round(τᶜ * 10))])
-
         global ℝ₁ = resample((mDp, mN), (δ₁ˢᵐᵖˢ.Dp, δ₁ˢᵐᵖˢ.De))
 
         plot4.data[1].ds.x = reverse(ℝ₁.Dp)
