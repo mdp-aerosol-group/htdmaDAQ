@@ -487,7 +487,6 @@
                     <property name="text" translatable="yes">10</property>
                     <property name="adjustment">adjustment2</property>
                     <property name="climb-rate">1</property>
-                    <property name="value">20</property>
                   </object>
                   <packing>
                     <property name="x">595</property>
