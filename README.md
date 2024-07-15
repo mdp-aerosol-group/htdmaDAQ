@@ -1,2 +1,3 @@
 # htdmaDAQ
-DAQ system for the NCSU HTDMA
+DAQ system for the UCR nano HTDMA
+
