@@ -133,8 +133,8 @@ function smps_signals()
         else
             Dds = ones(6) .* 400.0
         end
-        # Dds = ones(6) .* 200.0
-        map(set_dry_diameter, Dds, 1:6)
+        Dds = ones(6) .* 200.0
+        # map(set_dry_diameter, Dds, 1:6)
         plot4.data[2].ds.x = reverse(ℝ₁.Dp)
         plot4.data[2].ds.y = reverse(dist)
         refreshplot(gplot4)
@@ -231,11 +231,9 @@ function smps_signals()
         if globalState.value == "SMPS"
             holdTime1, scanTime1, flushTime1, scanLength1, startVoltage1, endVoltage1, c1 =
                 scan_parameters(1)
-            valve(:SMPS)
         elseif globalState.value == "HTDMA"
             holdTime1, scanTime1, flushTime1, scanLength1, startVoltage1, endVoltage1, c1 =
                 scan_parameters(2)
-            valve(:HTDMA)
         else
             scanLength1 = 300
         end

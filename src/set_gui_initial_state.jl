@@ -107,9 +107,9 @@ end
 plotHTDMA1 = graph2(:log)
 mHTDMA1, gplotHTDMA1 =
     push_plot_to_gui!(plotHTDMA1, gui["HTDMAAerosolSizeDistribution1"], wnd)
-wfrm = add(plotHTDMA1, [0.0], [0.0], id = "R")
+wfrm = add(plotHTDMA1, [0.0], [0.0], id = "Upscan")
 wfrm.line = line(color = black, width = 2, style = style)
-wfrm = add(plotHTDMA1, [0.0], [0.0], id = "Ncpc")
+wfrm = add(plotHTDMA1, [0.0], [0.0], id = "Downscan")
 wfrm.line = line(color = mgrey, width = 2, style = style)
 wfrm = add(plotHTDMA1, [0.0], [0.0], id = "Ddry")
 wfrm.line = line(color = red, width = 2, style = style)

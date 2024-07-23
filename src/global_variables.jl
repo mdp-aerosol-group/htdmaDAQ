@@ -46,6 +46,7 @@ global HTDMA_df = DataFrame(
 
 global ℝ₁ = SizeDistribution
 global ℝ₂ = Array{SizeDistribution,1}(undef, 6)
+global ℝ₃ = Array{SizeDistribution,1}(undef, 6)
 global ℝᶜ = Array{Array{Union{Float64,Missing},1}}(undef, 6)
 global HTDMA_ts = Array{DateTime,1}(undef, 6)
 global HTDMA_tenHz = Array{DataFrame,1}(undef, 6)

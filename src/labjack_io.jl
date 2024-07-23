@@ -152,7 +152,10 @@ function setupLabjackBuffers(Vdac0, Vdac1, BitFIO3, BitFIO4)
     return send, rec
 end
 
-function labjackReadWrite(Vdac1, Vdac2, FIOA, FIOB; HANDLE = HANDLE, caliInfo = caliInfo)
+function labjackReadWrite(Vdac1, Vdac2, FIOA, FIOB; HANDLE = HANDLE, caliInfo = caliInfo, caliInfoTdac = false)
+    if caliInfoTdac ≠ false
+         setLJTDAC(HANDLE,caliInfoTdac,0,Vdac2,Vdac1)
+    end
     sendIt, recordIt = setupLabjackBuffers(Vdac1, Vdac2, true, true)
 
     labjackSend(HANDLE, sendIt)

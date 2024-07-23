@@ -12,7 +12,7 @@
   <object class="GtkAdjustment" id="adjustment2">
     <property name="lower">-60</property>
     <property name="upper">100</property>
-    <property name="value">-15</property>
+    <property name="value">20</property>
     <property name="step-increment">1</property>
     <property name="page-increment">10</property>
   </object>
@@ -33,7 +33,7 @@
   <object class="GtkAdjustment" id="adjustment5">
     <property name="lower">1</property>
     <property name="upper">500</property>
-    <property name="value">85</property>
+    <property name="value">60</property>
     <property name="step-increment">1</property>
     <property name="page-increment">10</property>
   </object>
@@ -167,7 +167,7 @@
                     <property name="can-focus">True</property>
                     <property name="hexpand">True</property>
                     <property name="vexpand">True</property>
-                    <property name="text" translatable="yes">/dev/ttyUSB2</property>
+                    <property name="text" translatable="yes">/dev/ttyS3</property>
                   </object>
                   <packing>
                     <property name="x">250</property>
@@ -271,7 +271,7 @@
                     <property name="can-focus">True</property>
                     <property name="hexpand">True</property>
                     <property name="vexpand">True</property>
-                    <property name="text" translatable="yes">/dev/ttyUSB1</property>
+                    <property name="text" translatable="yes">/dev/ttyS4</property>
                   </object>
                   <packing>
                     <property name="x">460</property>
@@ -362,7 +362,7 @@
                     <property name="can-focus">True</property>
                     <property name="hexpand">True</property>
                     <property name="vexpand">True</property>
-                    <property name="text" translatable="yes">/dev/ttyUSB3</property>
+                    <property name="text" translatable="yes">/dev/ttyUSB0</property>
                   </object>
                   <packing>
                     <property name="x">250</property>
@@ -503,7 +503,7 @@
                     <property name="text" translatable="yes">-40</property>
                     <property name="adjustment">adjustment3</property>
                     <property name="climb-rate">1</property>
-                    <property name="value">100</property>
+                    <property name="value">80</property>
                   </object>
                   <packing>
                     <property name="x">715</property>
@@ -519,7 +519,7 @@
                     <property name="text" translatable="yes">25</property>
                     <property name="adjustment">adjustment5</property>
                     <property name="climb-rate">1</property>
-                    <property name="value">100</property>
+                    <property name="value">60</property>
                   </object>
                   <packing>
                     <property name="x">835</property>
@@ -1145,7 +1145,6 @@
                     <property name="width-request">168</property>
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
-                    <property name="text" translatable="yes">0.05</property>
                   </object>
                   <packing>
                     <property name="x">1070</property>
@@ -1276,7 +1275,7 @@
                   <object class="GtkEntry" id="SMPS1SheathFlow">
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
-                    <property name="text" translatable="yes">5</property>
+                    <property name="text" translatable="yes">8</property>
                   </object>
                   <packing>
                     <property name="x">660</property>
@@ -1350,7 +1349,7 @@
                     <property name="width-request">168</property>
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
-                    <property name="text" translatable="yes">180</property>
+                    <property name="text" translatable="yes">120</property>
                   </object>
                   <packing>
                     <property name="x">250</property>
@@ -1374,7 +1373,7 @@
                     <property name="width-request">168</property>
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
-                    <property name="text" translatable="yes">100</property>
+                    <property name="text" translatable="yes">500</property>
                   </object>
                   <packing>
                     <property name="x">250</property>
@@ -2260,7 +2259,7 @@
                   <object class="GtkEntry" id="SMPS2SheathFlow">
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
-                    <property name="text" translatable="yes">5</property>
+                    <property name="text" translatable="yes">3.12</property>
                   </object>
                   <packing>
                     <property name="x">678</property>
@@ -2271,7 +2270,7 @@
                   <object class="GtkEntry" id="SMPS2SampleFlow">
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
-                    <property name="text" translatable="yes">1.0</property>
+                    <property name="text" translatable="yes">0.4</property>
                   </object>
                   <packing>
                     <property name="x">678</property>
@@ -2282,7 +2281,7 @@
                   <object class="GtkEntry" id="SMPS2PlumbTime">
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
-                    <property name="text" translatable="yes">3.5</property>
+                    <property name="text" translatable="yes">6.2</property>
                   </object>
                   <packing>
                     <property name="x">678</property>

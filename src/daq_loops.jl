@@ -1,15 +1,44 @@
+# function vtod_lookup_function()    
+#     Vs = ncread("lookup_vtod.cdf", "Vs")    
+#     Ts = ncread("lookup_vtod.cdf", "Ts")    
+#     ps = ncread("lookup_vtod.cdf", "ps")    
+#     lookup = ncread("lookup_vtod.cdf", "lookup")    
+#     itp = interpolate((Vs, Ts, ps), lookup, Gridded(Linear()))    
+#     extp = extrapolate(itp, NaN)    
+#     return extp    
+# end    
+     
+# vtod_lookup = vtod_lookup_function()  
+
 function tenHz_daq_loop()
     # LABJACK Read 
     AIN, Tk, rawcount, count = labjack_signals.value
-    N1cpcCount = count[1] / tenHz.value / (flowRate1 * 16.6666666)
-    N2cpcCount = count[2] / tenHz.value / (flowRate2 * 16.6666666)
+    N1cpcCount = count[2] / tenHz.value / (0.4 * 16.6666666)
+    N2cpcCount = count[1] / tenHz.value / (0.4 * 16.6666666)
+    
+    RH, T, Td = AIN2HC(AIN, 3, 4)
+
+    set_gtk_property!(gui["readRH1"], :text, @sprintf("%0.1f", RH))
+    set_gtk_property!(gui["readT1"], :text, @sprintf("%0.1f", T))
+    set_gtk_property!(gui["readTd1"], :text, @sprintf("%0.1f", Td))
+
 
     readV2 = AIN[1] .* 1000
     readV1 = AIN[3] .* 1000
     push!(Vr, abs.([readV1, readV2]))
 
-    set_gtk_property!(gui["Ncounts1"], :text, @sprintf("%0.1f", N1cpcCount))
-    set_gtk_property!(gui["Ncounts2"], :text, @sprintf("%0.1f", N2cpcCount))
+    if N1cpcCount < 0.0
+        N1cpcCount =  get_gtk_property(gui["Ncounts1"], :text, String) |> x -> parse(Float64, x)
+    else
+        set_gtk_property!(gui["Ncounts1"], :text, @sprintf("%0.1f", N1cpcCount))
+    end
+
+    if N2cpcCount < 0.0
+        N2cpcCount =  get_gtk_property(gui["Ncounts2"], :text, String) |> x -> parse(Float64, x)
+    else
+        set_gtk_property!(gui["Ncounts2"], :text, @sprintf("%0.1f", N2cpcCount))
+    end
+    
 
     set_gtk_property!(gui["SMPS1ReadV1"], :text, @sprintf("%0.1f", readV1))
     set_gtk_property!(gui["SMPS2ReadV1"], :text, @sprintf("%0.1f", readV2))
@@ -58,13 +87,14 @@ function tenHz_daq_loop()
 end
 
 function oneHz_htdma_loop()
-    state = deepcopy(tenHz_df[!, :stateDMA2])
-    Dp = deepcopy(tenHz_df[!, :currentDiameterDMA2])
+    mdf = deepcopy(tenHz_df)
+    state = deepcopy(mdf[!, :stateDMA2])
+    Dp = deepcopy(mdf[!, :currentDiameterDMA2])
     useCounts = get_gtk_property(gui["SMPS2UseCounts"], :state, Bool)
     N =
-        (useCounts == true) ? deepcopy(tenHz_df[!, :N2cpcCount]) :
-        deepcopy(tenHz_df[!, :N2cpcSerial])
-    Ncpc = deepcopy(tenHz_df[!, :N1cpcCount])
+        (useCounts == true) ? deepcopy(mdf[!, :N2cpcCount]) :
+        deepcopy(mdf[!, :N2cpcSerial])
+    Ncpc = deepcopy(mdf[!, :N1cpcCount])
     τᶜ = get_gtk_property(gui["SMPS2PlumbTime"], :text, String) |> x -> parse(Float64, x)
     τserial =
         get_gtk_property(gui["SMPS2SerialDelay"], :text, String) |> x -> parse(Float64, x)
@@ -74,9 +104,8 @@ function oneHz_htdma_loop()
         -lambertw(-x * flowRate2 * 16.666τ * 1e-6, 0) / (flowRate2 * 16.6666 * τ * 1e-6)
     if length(N) > τᶜ * 10 + 1
         N = circshift(N, Int(round(-τᶜ * 10)))
-        N = N
         Ncpc = circshift(Ncpc, Int(round(-τᶜ * 10)))
-        Ncpc = Ncpc
+        ii = (state .== :UPSCAN) 
         if (useCounts == true)
             N = try
                 correct(N)
@@ -84,22 +113,27 @@ function oneHz_htdma_loop()
                 N
             end
         end
-        Dp = Dp
         mDp = reverse(Dp[1:end-Int(round(τᶜ * 10))])
         mN = reverse(N[1:end-Int(round(τᶜ * 10))])
         mCPC = reverse(Ncpc[1:end-Int(round(τᶜ * 10))])
+        mstate = reverse(state[1:end-Int(round(τᶜ * 10))])
+        ii = (mstate .== :UPSCAN)
+        jj = (mstate .== :DOWNSCAN)
+        
         n = htdma_diam_number.value
         if (n >= 1) && (n <= 6)
-            ℝ₂[n], ℝᶜ[n] = resampleTDMA((mDp, mN, mCPC), (δ₂ˢᵐᵖˢ.Dp, δ₂ˢᵐᵖˢ.De))
+            ℝ₂[n],aa = resampleTDMA((mDp[ii], mN[ii], mCPC[ii]), (δ₂ˢᵐᵖˢ.Dp, δ₂ˢᵐᵖˢ.De))
+            if sum(jj) > 0
+               ℝ₃[n], _ = resampleTDMA((mDp[jj], mN[jj], mCPC[jj]), (δ₂ˢᵐᵖˢ.Dp, δ₂ˢᵐᵖˢ.De))
+            else
+                ℝ₃[n], _ = resampleTDMA((mDp[ii], zeros(sum(ii)), zeros(sum(ii))), (δ₂ˢᵐᵖˢ.Dp, δ₂ˢᵐᵖˢ.De))
+           end
+
         end
         eval(Meta.parse("plotHTDMA$n.data[1].ds.x = reverse(ℝ₂[$n].Dp)"))
         eval(Meta.parse("plotHTDMA$n.data[1].ds.y = reverse(ℝ₂[$n].N)"))
-        if typeof(Meta.parse("sum(ℝᶜ[$n])")) != Missing
-            Nx = eval(Meta.parse("ℝᶜ[$n]"))
-            Nx = convert(Array{Float64}, Nx)
-            eval(Meta.parse("plotHTDMA$n.data[2].ds.x = reverse(ℝ₂[$n].Dp)"))
-            eval(Meta.parse("plotHTDMA$n.data[2].ds.y = reverse($Nx)"))
-        end
+        eval(Meta.parse("plotHTDMA$n.data[2].ds.x = reverse(ℝ₃[$n].Dp)"))
+        eval(Meta.parse("plotHTDMA$n.data[2].ds.y = reverse(ℝ₃[$n].N)"))
         miny, maxy = Float64[], Float64[]
         for x in eval(Meta.parse("plotHTDMA$n.data[1:2]"))
             push!(miny, minimum(skipmissing(x.ds.y)))
@@ -221,12 +255,27 @@ function generic_loop()
     t = main_elapsed_time.value
 
     push!(datestr, Dates.format(now(), "yyyymmdd"))
-    Nserial1 = readCPC(port1, CPCType1, flowRate1)[1]
-    Nserial2 = readCPC(port2, CPCType2, flowRate2)[1]
-    # Nserial1 = 0
-    # Nserial2 = 0
-    set_gtk_property!(gui["Nserial1"], :text, parse_missing(Nserial1))
-    set_gtk_property!(gui["Nserial2"], :text, parse_missing(Nserial2))
+    Nserial1 = 0.0
+    a = try
+        str = reduce(*,vcat(CondensationParticleCounters.dataBuffer[end-2:end]))
+        a = split(str, "\r\n")
+
+        cpcp = a[end-1]
+        (cpcp[1:2] .== "20") && (cpcp[end-2:end] .== "132") ? cpcp : "00"
+    catch
+        "00"
+    end
+
+    cs = try
+        rawc = @chain split(a, ",") getindex(_, 20) parse(Float64, _)
+        flow = @chain split(a, ",") getindex(_, 16) parse(Float64, _)
+        round(rawc/flow .* 60.0, digits = 1)
+    catch
+        0.0
+    end
+
+    set_gtk_property!(gui["Nserial1"], :text, parse_missing(0.0))
+    set_gtk_property!(gui["Nserial2"], :text, parse_missing(cs))
 
     if updatePower.value == true
         value = get_gtk_property(gui["power"], :state, Bool)
@@ -360,27 +409,27 @@ function inlet()
     AIN, _, _, _ = labjackReadWrite(0.0, 0.0, false, false; HANDLE = HANDLE1)
     RH, T, Td = AIN2HC(AIN, 1, 2)
 
-    set_gtk_property!(gui["readRH1"], :text, @sprintf("%0.1f", RH))
-    set_gtk_property!(gui["readT1"], :text, @sprintf("%0.1f", T))
-    set_gtk_property!(gui["readTd1"], :text, @sprintf("%0.1f", Td))
+    set_gtk_property!(gui["readRH2"], :text, @sprintf("%0.1f", RH))
+    set_gtk_property!(gui["readT2"], :text, @sprintf("%0.1f", T))
+    set_gtk_property!(gui["readTd2"], :text, @sprintf("%0.1f", Td))
 
-    count = sum(dataBufferCounts[end])
-    set_gtk_property!(gui["POPSq"], :text, @sprintf("%0.2f", dataBufferQ[end]))
-    set_gtk_property!(gui["POPSq1"], :text, @sprintf("%0.1f", dataBufferN[end]))
-    set_gtk_property!(gui["POPScount"], :text, @sprintf("%i", count))
+    # count = sum(dataBufferCounts[end])
+    # set_gtk_property!(gui["POPSq"], :text, @sprintf("%0.2f", dataBufferQ[end]))
+    # set_gtk_property!(gui["POPSq1"], :text, @sprintf("%0.1f", dataBufferN[end]))
+    # set_gtk_property!(gui["POPScount"], :text, @sprintf("%i", count))
 
     # set_gtk_property!(gui["UDPdata"], :text, get_packet())
-    t = main_elapsed_time.value
-    addpoint!(t, dataBufferN[end], POPSConc, gplotConc, 1, true)
-    addpoint!(t, dataBufferQ[end], POPSFlow, gplotFlow, 1, false)
-    graph = POPSFlow.strips[1]
-    graph.yext = InspectDR.PExtents1D()
-    graph.yext_full = InspectDR.PExtents1D(0.0, 0.5)
-    addpoint!(t, count, POPSCount, gplotCount, 1, true)
-    try
-        x = range(logmin, stop = logmax, length = nbins) |> collect
-        addseries!(exp10.(x), mean(dataBufferCounts), POPSHist, gplotHist, 1, true, true)
-    catch
-    end
+    # t = main_elapsed_time.value
+    # addpoint!(t, dataBufferN[end], POPSConc, gplotConc, 1, true)
+    # addpoint!(t, dataBufferQ[end], POPSFlow, gplotFlow, 1, false)
+    # graph = POPSFlow.strips[1]
+    # graph.yext = InspectDR.PExtents1D()
+    # graph.yext_full = InspectDR.PExtents1D(0.0, 0.5)
+    # addpoint!(t, count, POPSCount, gplotCount, 1, true)
+    # try
+    #     x = range(logmin, stop = logmax, length = nbins) |> collect
+    #     addseries!(exp10.(x), mean(dataBufferCounts), POPSHist, gplotHist, 1, true, true)
+    # catch
+    # end
 
 end

@@ -142,6 +142,7 @@ function set_voltage_SMPS(source::String, destination::String, SMPS::Int)
 end
 
 function get_DMA_dimensions(column)
+    (column == :TSI1nm) && ((r₁, r₂, l) = (9.37e-3, 1.905e-2, 0.02))
     (column == :TSI) && ((r₁, r₂, l) = (9.37e-3, 1.961e-2, 0.44369))
     (column == :HFDMA) && ((r₁, r₂, l) = (0.05, 0.058, 0.6))
     (column == :RDMA) && ((r₁, r₂, l) = (2.4e-3, 50.4e-3, 10e-3))
@@ -161,7 +162,7 @@ function set_SMPS1_config()
 	polarity = :-
 	m = 6
 
-	r₁, r₂, l, form = get_DMA_dimensions(:TSI) 
+	r₁, r₂, l, form = get_DMA_dimensions(:HFDMA) 
 	global Λ₁ˢᵐᵖˢ = DMAconfig(t,p,qsa,qsh,r₁,r₂,l,leff,polarity,m,form) 
 	v₁,v₂ = 10,10000      
 	z₁,z₂ = vtoz(Λ₁ˢᵐᵖˢ,v₂), vtoz(Λ₁ˢᵐᵖˢ,v₁)
@@ -184,7 +185,7 @@ function set_SMPS2_config()
 	global Λ₂ˢᵐᵖˢ = DMAconfig(t,p,qsa,qsh,r₁,r₂,l,leff,polarity,m,form) 
 	v₁,v₂ = 10,10000      
 	z₁,z₂ = vtoz(Λ₂ˢᵐᵖˢ,v₂), vtoz(Λ₂ˢᵐᵖˢ,v₁)
-	global δ₂ˢᵐᵖˢ = setupDMA(Λ₁ˢᵐᵖˢ, z₁, z₂, bins)
+	global δ₂ˢᵐᵖˢ = setupDMA(Λ₂ˢᵐᵖˢ, z₁, z₂, bins)
 	N = zeros(length(δ₂ˢᵐᵖˢ.Dp))
 end
 
@@ -282,7 +283,16 @@ end
 
 function set_dry_diameter(Dd, n)
     set_gtk_property!(gui["Diameter$n"], :text, @sprintf("%.1f", Dd))
-    set_gtk_property!(gui["DiameterMin$n"], :text, @sprintf("%.1f", 0.5*Dd))
+    set_gtk_property!(gui["DiameterMin$n"], :text, @sprintf("%.1f", 20.0))
+    set_gtk_property!(gui["DiameterMax$n"], :text, @sprintf("%.1f", 500.0))
+    set_voltage_SMPS("DiameterMin$n", "VoltageMin$n", 2)   
+    set_voltage_SMPS("DiameterMax$n", "VoltageMax$n", 2)  
+    set_voltage_SMPS("Diameter$n", "ClassifierVoltage$n", 1)     
+end
+
+function set_dry_diameter1(Dd, n)
+    set_gtk_property!(gui["Diameter$n"], :text, @sprintf("%.1f", Dd))
+    set_gtk_property!(gui["DiameterMin$n"], :text, @sprintf("%.1f", 0.6*Dd))
     set_gtk_property!(gui["DiameterMax$n"], :text, @sprintf("%.1f", 1.4*Dd))
     set_voltage_SMPS("DiameterMin$n", "VoltageMin$n", 2)   
     set_voltage_SMPS("DiameterMax$n", "VoltageMax$n", 2)  
