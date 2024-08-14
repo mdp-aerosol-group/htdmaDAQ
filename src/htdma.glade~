@@ -19,7 +19,7 @@
   <object class="GtkAdjustment" id="adjustment3">
     <property name="lower">-60</property>
     <property name="upper">100</property>
-    <property name="value">70</property>
+    <property name="value">80</property>
     <property name="step-increment">1</property>
     <property name="page-increment">10</property>
   </object>
@@ -167,7 +167,7 @@
                     <property name="can-focus">True</property>
                     <property name="hexpand">True</property>
                     <property name="vexpand">True</property>
-                    <property name="text" translatable="yes">/dev/ttyS3</property>
+                    <property name="text" translatable="yes">/dev/ttyS5</property>
                   </object>
                   <packing>
                     <property name="x">250</property>
@@ -1876,7 +1876,7 @@
                     <property name="width-request">168</property>
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
-                    <property name="text" translatable="yes">60</property>
+                    <property name="text" translatable="yes">120</property>
                   </object>
                   <packing>
                     <property name="x">246</property>

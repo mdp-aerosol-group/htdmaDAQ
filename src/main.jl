@@ -62,7 +62,6 @@ reset,
 V,
 Dp = smps_signals()
 
-
 stateReset = map(instrumentStateChanged) do _
     push!(elapsed_time, 0.0)
 end

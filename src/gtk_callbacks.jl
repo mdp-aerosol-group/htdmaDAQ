@@ -284,7 +284,7 @@ end
 function set_dry_diameter(Dd, n)
     set_gtk_property!(gui["Diameter$n"], :text, @sprintf("%.1f", Dd))
     set_gtk_property!(gui["DiameterMin$n"], :text, @sprintf("%.1f", 20.0))
-    set_gtk_property!(gui["DiameterMax$n"], :text, @sprintf("%.1f", 500.0))
+    set_gtk_property!(gui["DiameterMax$n"], :text, @sprintf("%.1f", 700.0))
     set_voltage_SMPS("DiameterMin$n", "VoltageMin$n", 2)   
     set_voltage_SMPS("DiameterMax$n", "VoltageMax$n", 2)  
     set_voltage_SMPS("Diameter$n", "ClassifierVoltage$n", 1)     

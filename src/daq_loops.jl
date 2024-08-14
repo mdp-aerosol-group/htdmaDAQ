@@ -257,7 +257,7 @@ function generic_loop()
     push!(datestr, Dates.format(now(), "yyyymmdd"))
     Nserial1 = 0.0
     a = try
-        str = reduce(*,vcat(CondensationParticleCounters.dataBuffer[end-2:end]))
+        str = reduce(*,vcat(dataBufferCPC1[end-2:end]))
         a = split(str, "\r\n")
 
         cpcp = a[end-1]
@@ -274,7 +274,24 @@ function generic_loop()
         0.0
     end
 
-    set_gtk_property!(gui["Nserial1"], :text, parse_missing(0.0))
+    b = try
+        str = reduce(*,vcat(dataBufferCPC2[end-2:end]))
+        b = split(str, "\r\r")
+
+        cpcp = a[end-1]
+
+        (cpcp[1:4] .== "RALL") && (length(cpcp) > 50) ? cpcp : "00"
+    catch
+        "00"
+    end
+    
+    cs2 = try
+        rawconc = @chain split(b, ',') getindex(3) parse(Float64, _)
+    catch
+        0.0
+    end
+
+    set_gtk_property!(gui["Nserial1"], :text, parse_missing(cs2))
     set_gtk_property!(gui["Nserial2"], :text, parse_missing(cs))
 
     if updatePower.value == true

@@ -25,7 +25,7 @@
 using LibSerialPort
 
 function port_requirements(CPCType)
-	if (CPCType == :TSI3771) || (CPCType == :TSI3772) || (CPCType == :TSI3776C)
+	if (CPCType == :TSI3771) || (CPCType == :TSI3772) || (CPCType == :TSI3776C) || (CPCType == :TSI3789)
 		return 115200, 8, 1, SP_PARITY_NONE
 	elseif (CPCType == :TSI3010)
 		return 9600, 7, 1, SP_PARITY_EVEN
@@ -93,7 +93,7 @@ function readWriteCPC(port, CPCType, flowRate, sigV)
 		LibSerialPort.sp_nonblocking_write(port, "V"*str*"\r")
     end
 
-    if (CPCType == :TSI3771) || (CPCType == :TSI3772) || (CPCType == :TSI3776C)
+    if (CPCType == :TSI3771) || (CPCType == :TSI3772) || (CPCType == :TSI3776C) || (CPCType == :TSI3789)
 		str = @sprintf("%5.3f", sigV) 
         LibSerialPort.sp_nonblocking_write(port, "RALL\r")
 		sleep(0.5)
