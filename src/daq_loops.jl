@@ -278,7 +278,7 @@ function generic_loop()
         str = reduce(*,vcat(dataBufferCPC2[end-2:end]))
         b = split(str, "\r\r")
 
-        cpcp = a[end-1]
+        cpcp = b[end-1]
 
         (cpcp[1:4] .== "RALL") && (length(cpcp) > 50) ? cpcp : "00"
     catch
